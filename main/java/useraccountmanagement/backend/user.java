@@ -50,7 +50,7 @@ public class user {
 
     public void AddUderToFile() {
         try {
-            String FILE_PATH="users.json";
+            String FILE_PATH= "resourses/users.json";
             File file = new File(FILE_PATH);
             JSONArray usersArray;
             if (file.exists() && file.length() > 0) {

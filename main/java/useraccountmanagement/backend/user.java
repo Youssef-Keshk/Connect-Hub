@@ -4,24 +4,48 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
-public class user {
-    private String userId;
+public class User {
+    private static int dynamicnumber=0;
+    private  String userId;
     private String email;
     private String username;
     private String password;
     private String status ;
     private LocalDate dateOfBirth;
 
-    public user(String userId, String email, String username, String password, String status, LocalDate dateOfBirth) {
-        this.userId = userId;
+    public User(String email, String username, String password, String status, LocalDate dateOfBirth) {
+        dynamicnumber++;
+        this.userId = "A"+dynamicnumber;
         this.email = email;
         this.username = username;
-        this.password = password;
+        this.password = hashPassword(password);
         this.status = status;
         this.dateOfBirth = dateOfBirth;
-        this.AddUderToFile();
+    }
+    public User(){
+        this.userId = null;
+        this.email = null;
+        this.username = null;
+        this.password = null;
+        this.status = null;
+        this.dateOfBirth = null;
+    }
+
+    public void User1(String email, String username, String hashpassword, String status, LocalDate dateOfBirth) {
+        dynamicnumber++;
+        this.userId = "A"+dynamicnumber;
+        this.email = email;
+        this.username = username;
+        this.password = hashpassword;
+        this.status = status;
+        this.dateOfBirth = dateOfBirth;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUserId() {
@@ -48,42 +72,22 @@ public class user {
         return dateOfBirth;
     }
 
-    public void AddUderToFile() {
-        try {
-            String FILE_PATH= "resourses/users.json";
-            File file = new File(FILE_PATH);
-            JSONArray usersArray;
-            if (file.exists() && file.length() > 0) {
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-                StringBuilder jsonData = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    jsonData.append(line);
-                }
-                reader.close();
-                usersArray = new JSONArray(jsonData.toString());
-            } else {
-                usersArray = new JSONArray();
-            }
 
-            JSONObject newUser = new JSONObject();
-            newUser.put("userId", this.userId);
-            newUser.put("email", this.email);
-            newUser.put("username", this.username);
-            newUser.put("password", this.password);
-            newUser.put("status", this.status);
-            newUser.put("dateOfBirth", this.dateOfBirth.toString());
 
-            usersArray.put(newUser);
+     public String hashPassword(String password) {
+         try {
+             MessageDigest digest = MessageDigest.getInstance("SHA-256");
+             byte[] hashedBytes = digest.digest(password.getBytes());
 
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write(usersArray.toString(4));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+             StringBuilder hexString = new StringBuilder();
+             for (byte b : hashedBytes) {
+                 hexString.append(String.format("%02x", b));
+             }
+             return hexString.toString();
+         } catch (NoSuchAlgorithmException e) {
+             throw new RuntimeException("SHA-256 algorithm not found", e);
+         }
+     }
     
 
 }

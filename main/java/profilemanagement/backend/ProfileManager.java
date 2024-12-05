@@ -6,16 +6,15 @@ import java.util.Optional;
 
 public class ProfileManager {
     private final JsonHandler<User> userHandler = new JsonHandler<>("users.json", User.class);
-    private final UserManager userManager;
+    private final UserAccountManagement userManager;
 
-    public ProfileManager(UserManager userManager) {
+    public ProfileManager(UserAccountManagement userManager) {
         this.userManager = userManager;
     }
 
     public boolean updateBio(String userId, String newBio) {
-        Optional<User> userOpt = userManager.getUserById(userId);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
+        User user = userManager.getUser(userId);
+        if (user != null) {
             user.profile.setBio(newBio);
             userHandler.saveAll(userManager.getUsers());
             return true;
@@ -24,9 +23,8 @@ public class ProfileManager {
     }
 
     public boolean updateProfilePhoto(String userId, String photoPath) {
-        Optional<User> userOpt = userManager.getUserById(userId);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
+        User user = userManager.getUser(userId);
+        if (user != null) {
             user.profile.setProfilePhotoPath(photoPath);
             userHandler.saveAll(userManager.getUsers());
             return true;
@@ -35,9 +33,8 @@ public class ProfileManager {
     }
 
     public boolean updateCoverPhoto(String userId, String photoPath) {
-        Optional<User> userOpt = userManager.getUserById(userId);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
+        User user = userManager.getUser(userId);
+        if (user != null) {
             user.profile.setCoverPhotoPath(photoPath);
             userHandler.saveAll(userManager.getUsers());
             return true;
@@ -45,16 +42,22 @@ public class ProfileManager {
         return false;
     }
     
-    public boolean updatePassword(String userId, String oldPass, String newPass){
-        Optional<User> userOpt = userManager.getUserById(userId);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-            if(user.getPassword().equals(oldPass)){
+    public boolean checkPassword(String userId, String oldPass){
+       User user = userManager.getUser(userId);
+        if (user != null) {          
+                if(user.getPassword().equals(oldPass))
+                return true;
+            }    
+        return false;
+    }
+    
+   
+    public boolean updatePassword(String userId, String newPass){
+       User user = userManager.getUser(userId);
+        if (user != null) {          
                 user.setPassword(newPass);
                 return true;
-            }
-            else return false;
-        }    
+            }    
         return false;
     }
 }

@@ -2,18 +2,6 @@ package authenticator;
 
 public class Validator {
 
-    // Method to validate a five alpha-numeric ID
-    public static boolean isValidID (String ID) {
-        String regex = "^\\w+$";
-        return ID.matches(regex);
-    }
-
-    // Method to validate ID (T for Trainer, M for Member, C for Class)
-    public static boolean isValidID (String id, char specialChar) {
-        String regex = "^" + specialChar + "\\d+$";
-        return id.matches(regex);
-    }
-
     // Method to validate name
     public static boolean isValidName (String name) {
         String regex = "^[a-zA-Z]{2,}(\\s[a-zA-Z]{2,})*$";

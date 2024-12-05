@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 public class PasswordHashing {
 
     // Method to hash a password
-    public String getHashedPassword(String password) {
+    public static String getHashedPassword(String password) {
         try {
             // Create a MessageDigest instance for SHA-256
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -33,7 +33,7 @@ public class PasswordHashing {
     }
 
     // Method to compare a plain password to a hashed password
-    public boolean comparePasswords(String plainPassword, String hashedPassword) {
+    public static boolean comparePasswords(String plainPassword, String hashedPassword) {
         // Hash the plain password
         String computedHash = getHashedPassword(plainPassword);
 

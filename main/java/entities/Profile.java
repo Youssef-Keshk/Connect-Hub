@@ -1,10 +1,28 @@
-package profilemanagement.backend;
+package entities;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Profile {
-    public String profilePhotoPath;
-    public String coverPhotoPath;
-    public String bio;
+    @JsonProperty
+    private String profilePhotoPath;
+    @JsonProperty
+    private String coverPhotoPath;
+    @JsonProperty
+    private String bio;
 
+    public Profile(){}
+    
+    Profile(ProfileBuilder builder) {
+        this.profilePhotoPath = builder.profilePhotoPath;
+        this.coverPhotoPath = builder.coverPhotoPath;
+        this.bio = builder.bio;
+    }
+    
+    public static ProfileBuilder builder() {
+        return new ProfileBuilder();
+    }
+    
     public String getProfilePhotoPath() {
         return profilePhotoPath;
     }
@@ -27,5 +45,10 @@ public class Profile {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    @Override
+    public String toString() {
+        return "Profile{" + "profilePhotoPath=" + profilePhotoPath + ", coverPhotoPath=" + coverPhotoPath + ", bio=" + bio + '}';
     }
 }

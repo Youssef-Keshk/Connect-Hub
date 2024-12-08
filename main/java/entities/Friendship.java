@@ -1,40 +1,50 @@
-package friendmanagement.backend;
+package entities;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import statuses.FriendshipStatus;
 
 
 public class Friendship {
-    private String senderID;
-    private String receiverID;
-    private String status;
+    @JsonProperty
+    private String senderId;
+    @JsonProperty
+    private String receiverId;
+    @JsonProperty
+    private FriendshipStatus status;
     
     public Friendship(){}
-
-    public Friendship(String senderID, String receiverId, String status) {
-        this.senderID = senderID;
-        this.receiverID = receiverId;
-        this.status = status;
+    
+    Friendship(FriendshipBuilder builder) {
+        this.senderId = builder.senderId;
+        this.receiverId = builder.receiverId;
+        this.status = builder.status;
+    }
+    
+    public static FriendshipBuilder builder() {
+        return new FriendshipBuilder();
     }
 
     public String getSenderId() {
-        return senderID;
+        return senderId;
     }
 
     public String getReceiverId() {
-        return receiverID;
+        return receiverId;
     }
 
 
-    public String getStatus() {
+    public FriendshipStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(FriendshipStatus status) {
         this.status = status;
     }
     
 
     @Override
     public String toString() {
-        return "Friendship{" + "senderID=" + senderID + ", receiverID=" + receiverID + ", status=" + status + '}';
+        return "Friendship{" + "senderID=" + senderId + ", receiverID=" + receiverId + ", status=" + status + '}';
     }
     
     

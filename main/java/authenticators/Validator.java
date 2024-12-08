@@ -1,4 +1,4 @@
-package authenticator;
+package authenticators;
 
 public class Validator {
 
@@ -16,9 +16,15 @@ public class Validator {
 
     // Method to validate phone number --> (+20 0123456789 OR +20123456789 OR 0123456789)
     public static boolean isValidPhoneNumber (String phoneNumber) {
-        String regex = "^(\\+20\\s?(10|11|12|15)\\d{8}|0(10|11|12|15)\\d{8})$";
+        String regex = "^(\\+20\\s(10|11|12|15)\\d{8}|\\+20(10|11|12|15)\\d{8}|0(10|11|12|15)\\d{8})$";
         return phoneNumber.matches(regex);
-    }    
+    }
+
+    // Method to validate password
+    public static boolean isValidPassword (String password) {
+        String regex = "^.{4,}$";
+        return password.matches(regex);
+    }
 
 }
 

@@ -3,7 +3,7 @@ package authenticators;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class PasswordHashing {
+public class PasswordHasher {
 
     // Method to hash a password
     public static String getHashedPassword(String password) {

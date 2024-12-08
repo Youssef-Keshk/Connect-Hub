@@ -1,2 +1,37 @@
-[
-]
+[ {
+  "userId" : "U1",
+  "email" : "user1@example.com",
+  "username" : "Youssef Keshk",
+  "password" : "5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764",
+  "status" : "OFFLINE",
+  "dateOfBirth" : [ 1990, 1, 1 ],
+  "profile" : {
+    "profilePhotoPath" : "src/main/java/icons/defaultProfilePhoto.png",
+    "coverPhotoPath" : "src\\main\\java\\icons\\broken_knight-wallpaper-1366x768.jpg",
+    "bio" : "on fiiire"
+  }
+}, {
+  "userId" : "U2",
+  "email" : "user2@example.com",
+  "username" : "Zeyad Essam",
+  "password" : "6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4",
+  "status" : "OFFLINE",
+  "dateOfBirth" : [ 1995, 5, 15 ],
+  "profile" : {
+    "profilePhotoPath" : "src/main/java/icons/real-madrid-logo-wood-background.jpg",
+    "coverPhotoPath" : "src/main/java/icons/wallpaperflare.com_wallpaper.jpg",
+    "bio" : "Bio of user2"
+  }
+}, {
+  "userId" : "U3",
+  "email" : "khaled@gmail.com",
+  "username" : "Khaled",
+  "password" : "5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764",
+  "status" : "OFFLINE",
+  "dateOfBirth" : [ 2000, 1, 1 ],
+  "profile" : {
+    "profilePhotoPath" : "src/main/java/icons/defaultProfilePhoto.png",
+    "coverPhotoPath" : "src/main/java/icons/defaultProfilePhoto.png",
+    "bio" : ""
+  }
+} ]

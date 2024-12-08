@@ -1,2 +1,92 @@
-[
-]
+[ {
+  "contentId" : "P1",
+  "authorId" : "U1",
+  "text" : "User1's first post",
+  "imagePath" : "src/main/java/icons/1255215.jpg",
+  "publishDate" : "2024-12-07T12:30:00",
+  "type" : "post"
+}, {
+  "contentId" : "P2",
+  "authorId" : "U1",
+  "text" : "User1's second post",
+  "imagePath" : "src/main/java/icons/1099386.jpg",
+  "publishDate" : "2024-12-07T13:30:00",
+  "type" : "post"
+}, {
+  "contentId" : "P3",
+  "authorId" : "U1",
+  "text" : "User1's third post",
+  "imagePath" : "src/main/java/icons/wallpaperflare.com_wallpaper.jpg",
+  "publishDate" : "2024-12-07T14:30:00",
+  "type" : "post"
+}, {
+  "contentId" : "P4",
+  "authorId" : "U2",
+  "text" : "User2's first post",
+  "imagePath" : "src/main/java/icons/rL-OM-Buddhist-Meditation-Music-for-Positive-Energy-.jpg",
+  "publishDate" : "2024-12-07T15:30:00",
+  "type" : "post"
+}, {
+  "contentId" : "P5",
+  "authorId" : "U2",
+  "text" : "src/main/java/icons/Avengers Backgrounds 11.jpg",
+  "imagePath" : "path/to/post5_image.jpg",
+  "publishDate" : "2024-12-07T16:30:00",
+  "type" : "post"
+}, {
+  "contentId" : "P6",
+  "authorId" : "U2",
+  "text" : "User2's third post",
+  "imagePath" : "src/main/java/icons/wallpaperflare.com_wallpaper.jpg",
+  "publishDate" : "2024-12-07T17:30:00",
+  "type" : "post"
+}, {
+  "contentId" : "P7",
+  "authorId" : "U1",
+  "text" : "Hello everyone! This my first Post.",
+  "imagePath" : "src\\main\\java\\icons\\moon-images-at-night-dowload.jpg",
+  "publishDate" : "2024-12-07T22:00:38",
+  "type" : "post"
+}, {
+  "contentId" : "P8",
+  "authorId" : "U1",
+  "text" : "Hello",
+  "imagePath" : "src/main/java/icons/wallpaperflare.com.jpg",
+  "publishDate" : "2024-12-07T23:34:21",
+  "type" : "post"
+}, {
+  "contentId" : "P9",
+  "authorId" : "U1",
+  "text" : "Hello",
+  "imagePath" : "src\\main\\java\\icons\\moon-images-at-night-dowload.jpg",
+  "publishDate" : "2024-12-07T23:34:42",
+  "type" : "post"
+}, {
+  "contentId" : "P10",
+  "authorId" : "U2",
+  "text" : "What's on your mind ?",
+  "imagePath" : "src/main/java/icons/wallpaperflare.com_wallpaper.jpg",
+  "publishDate" : "2024-12-07T23:36:17",
+  "type" : "post"
+}, {
+  "contentId" : "P11",
+  "authorId" : "U2",
+  "text" : "What's on your mind ?",
+  "imagePath" : "src\\main\\java\\icons\\moon-images-at-night-dowload.jpg",
+  "publishDate" : "2024-12-07T23:41:26",
+  "type" : "post"
+}, {
+  "contentId" : "P12",
+  "authorId" : "U2",
+  "text" : "This is not a story!",
+  "imagePath" : "src\\main\\java\\icons\\1255215.jpg",
+  "publishDate" : "2024-12-07T23:41:27",
+  "type" : "post"
+}, {
+  "contentId" : "P13",
+  "authorId" : "U2",
+  "text" : "ghii",
+  "imagePath" : "src/main/java/icons/1255215.jpg",
+  "publishDate" : "2024-12-08T00:54:43",
+  "type" : "post"
+} ]

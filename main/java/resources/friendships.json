@@ -1,2 +1,5 @@
-[   
-]
+[ {
+  "senderId" : "U3",
+  "receiverId" : "U1",
+  "status" : "ACCEPTED"
+} ]

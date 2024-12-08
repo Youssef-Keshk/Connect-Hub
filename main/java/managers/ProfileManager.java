@@ -1,63 +1,87 @@
-package profilemanagement.backend;
+package managers;
 
-import database.JsonHandler;
-import useraccountmanagement.backend.*;
-import java.util.Optional;
+import authenticators.Validator;
+import authenticators.PasswordHasher;
+import entities.Profile;
+import databases.UserDatabase;
+import entities.User;
+
 
 public class ProfileManager {
-    private final JsonHandler<User> userHandler = new JsonHandler<>("users.json", User.class);
-    private final UserAccountManagement userManager;
-
-    public ProfileManager(UserAccountManagement userManager) {
-        this.userManager = userManager;
-    }
-
+    private final UserDatabase userDataBase = new UserDatabase();
+    
     public boolean updateBio(String userId, String newBio) {
-        User user = userManager.getUser(userId);
-        if (user != null) {
-            user.profile.setBio(newBio);
-            userHandler.saveAll(userManager.getUsers());
+        try {
+            Profile profile = userDataBase.getRecord(userId).getProfile();
+            profile.setBio(newBio);
+            userDataBase.saveRecords();
             return true;
-        }
-        return false;
+        }catch(NullPointerException e) {
+            return false;
+        }       
     }
-
+    
     public boolean updateProfilePhoto(String userId, String photoPath) {
-        User user = userManager.getUser(userId);
-        if (user != null) {
-            user.profile.setProfilePhotoPath(photoPath);
-            userHandler.saveAll(userManager.getUsers());
+        try {
+            Profile profile = userDataBase.getRecord(userId).getProfile();
+            profile.setProfilePhotoPath(photoPath);
+            userDataBase.saveRecords();
             return true;
-        }
-        return false;
+        }catch(NullPointerException e) {
+            return false;
+        }   
     }
-
+    
     public boolean updateCoverPhoto(String userId, String photoPath) {
-        User user = userManager.getUser(userId);
-        if (user != null) {
-            user.profile.setCoverPhotoPath(photoPath);
-            userHandler.saveAll(userManager.getUsers());
+        try {
+            Profile profile = userDataBase.getRecord(userId).getProfile();
+            profile.setCoverPhotoPath(photoPath);
+            userDataBase.saveRecords();
             return true;
-        }
-        return false;
+        }catch(NullPointerException e) {
+            return false;
+        }   
     }
     
-    public boolean checkPassword(String userId, String oldPass){
-       User user = userManager.getUser(userId);
-        if (user != null) {          
-                if(user.getPassword().equals(oldPass))
-                return true;
-            }    
-        return false;
+    public boolean updatePassword(String userId, String oldPassword, String newPassword) {
+       try {
+            User user = userDataBase.getRecord(userId); 
+            
+            // Validate password is 4 or more characters
+            if(!Validator.isValidPassword(newPassword))
+                return false;
+            
+            // Check if new password is identical to old password
+            if(newPassword.equals(oldPassword))
+                return false;
+            
+            // Check if old password is confirmed correctly
+            String oldHashedPassword = PasswordHasher.getHashedPassword(oldPassword); 
+            if(!oldHashedPassword.equals(user.getPassword()))
+                return false;
+               
+            String newHashedPassword = PasswordHasher.getHashedPassword(newPassword);
+            // set new password
+            user.setPassword(newHashedPassword);
+            userDataBase.saveRecords();
+            return true;
+            
+        }catch(NullPointerException e) {
+            return false;
+        }   
     }
     
+    public User getRecord(String userId) {
+        return userDataBase.getRecord(userId);
+    }
    
-    public boolean updatePassword(String userId, String newPass){
-       User user = userManager.getUser(userId);
-        if (user != null) {          
-                user.setPassword(newPass);
-                return true;
-            }    
-        return false;
-    }
+   public String getUsername(String userId) {
+       try {
+           return getRecord(userId).getUsername();
+       }catch(Exception e) {
+           return "";
+       }
+   }
+     
+    
 }

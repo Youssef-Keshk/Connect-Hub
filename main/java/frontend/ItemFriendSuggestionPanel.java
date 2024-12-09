@@ -101,7 +101,7 @@ public class ItemFriendSuggestionPanel extends javax.swing.JPanel {
 
     private void addFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFriendButtonActionPerformed
         JOptionPane.showMessageDialog(null, "Friend request sent to " + username, "Message", JOptionPane.INFORMATION_MESSAGE);
-        friendshipManager.sendRequest(user.getUserId(), parent.getUser().getUserId());
+        friendshipManager.sendRequest(parent.getUser().getUserId(), user.getUserId());
         parent.switchToNewsFeedPage();
     }//GEN-LAST:event_addFriendButtonActionPerformed
 

@@ -1,20 +1,20 @@
 package frontend;
 
 import java.awt.Color;
-import managers.UserManager;
+import managers.AccountManager;
 import entities.User;
 import javax.swing.JOptionPane;
 
 
 public class LoginPanel extends javax.swing.JPanel {
     private final MainFrame parent;
-    private UserManager userManager;
+    private final AccountManager accountManager;
     private String username;
     private String password;
     
     public LoginPanel(MainFrame parent) {
         this.parent = parent;
-        userManager = parent.getUserManager();
+        accountManager = parent.getAccountManager();
         initComponents();
     }
     
@@ -34,7 +34,6 @@ public class LoginPanel extends javax.swing.JPanel {
     
     public void startLogin() {
         resetLabels();
-        userManager = parent.getUserManager();
     }
     
     private void setValues() throws NullPointerException{
@@ -224,7 +223,7 @@ public class LoginPanel extends javax.swing.JPanel {
            JOptionPane.showMessageDialog(null, "Some feilds are empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
        }
-       User user = userManager.login(username, password);
+       User user = accountManager.login(username, password);
        if(user != null) {
            parent.setUser(user);
            parent.switchToNewsFeedPage();

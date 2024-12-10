@@ -1,13 +1,13 @@
 package managers;
 
 import databases.FriendshipDatabase;
-import databases.UserDatabase;
+import databases.AccountDatabase;
 import java.util.ArrayList;
 import entities.User;
 
 
-public class FriendSuggester {
-    private final UserDatabase userDataBase = new UserDatabase();
+class FriendSuggester {
+    private final AccountDatabase userDataBase = new AccountDatabase();
     private final FriendshipDatabase friendshipDataBase = new FriendshipDatabase();
     
     public ArrayList<String> suggestFriends(String userID) {

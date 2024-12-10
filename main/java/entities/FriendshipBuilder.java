@@ -1,6 +1,6 @@
 package entities;
 
-import statuses.FriendshipStatus;
+import enums.FriendshipStatus;
 
 // Builder creational pattern for Friendship
 public class FriendshipBuilder {

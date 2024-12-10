@@ -16,23 +16,22 @@ public class ProfilePanel extends javax.swing.JPanel {
 
     private final MainFrame parent;
     private ContentManager contentManager;
-    private ProfileManager profileManager;
+    private AccountManager accountManager;
     private FriendshipManager friendshipManager;
 
     public ProfilePanel(MainFrame parent) {
         this.parent = parent;
+        contentManager = parent.getContentManager();
+        accountManager = parent.getAccountManager();
+        friendshipManager = parent.getFriendshipManager();
         initComponents();
         postsPanel.setLayout(new javax.swing.BoxLayout(postsPanel, javax.swing.BoxLayout.Y_AXIS));
     }
 
     public void startProfile() {
         resetLabels();
-        contentManager = parent.getContentManager();
-        profileManager = parent.getProfileManager();
-        friendshipManager = parent.getFriendshipManager();
         viewProfileData();
-        viewPosts();
-        
+        viewPosts();     
     }
 
     public void resetLabels() {
@@ -62,12 +61,12 @@ public class ProfilePanel extends javax.swing.JPanel {
     }
 
     public void viewProfileData() {
-        String profilePhoto = profileManager.getRecord(parent.getUser().getUserId()).getProfile().getProfilePhotoPath();
-        String coverPhoto = profileManager.getRecord(parent.getUser().getUserId()).getProfile().getCoverPhotoPath();
+        String profilePhoto = accountManager.getRecord(parent.getUser().getUserId()).getProfile().getProfilePhotoPath();
+        String coverPhoto = accountManager.getRecord(parent.getUser().getUserId()).getProfile().getCoverPhotoPath();
         viewProfilePic(profilePhoto);
         viewCoverPic(coverPhoto);
-        usernameLabel.setText(profileManager.getRecord(parent.getUser().getUserId()).getUsername());
-        bioTextField.setText(profileManager.getRecord(parent.getUser().getUserId()).getProfile().getBio());
+        usernameLabel.setText(accountManager.getRecord(parent.getUser().getUserId()).getUsername());
+        bioTextField.setText(accountManager.getRecord(parent.getUser().getUserId()).getProfile().getBio());
     }
 
     public void viewStories() {

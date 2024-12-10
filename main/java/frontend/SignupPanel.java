@@ -9,11 +9,11 @@ import entities.User;
 import entities.Profile;
 import databases.FilePaths;
 import java.time.format.DateTimeParseException;
-import managers.UserManager;
+import managers.AccountManager;
 
 public class SignupPanel extends javax.swing.JPanel {
     private final MainFrame parent;
-    private final UserManager userManager;
+    private final AccountManager accountManager;
     private String username;
     private String email;
     private String password;
@@ -22,7 +22,7 @@ public class SignupPanel extends javax.swing.JPanel {
     
     public SignupPanel(MainFrame parent) {
         this.parent = parent;
-        this.userManager = parent.getUserManager();
+        this.accountManager = parent.getAccountManager();
         initComponents();
     }
     
@@ -370,7 +370,7 @@ public class SignupPanel extends javax.swing.JPanel {
         Profile profile = createProfile();
         User user = createUser(profile);
         
-        success = userManager.signup(user);
+        success = accountManager.signup(user);
        
         if(success){
             parent.setUser(user);

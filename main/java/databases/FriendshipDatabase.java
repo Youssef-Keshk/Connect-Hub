@@ -1,6 +1,6 @@
 package databases;
 
-import statuses.FriendshipStatus;
+import enums.FriendshipStatus;
 import entities.Friendship;
 import java.util.ArrayList;
 

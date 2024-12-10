@@ -3,13 +3,29 @@ package managers;
 import entities.Story;
 import databases.ContentDatabase;
 import entities.Content;
+import entities.ContentFactory;
+import entities.ContentFactoryData;
 import entities.Post;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import enums.ContentType;
 
-public class ContentManager {
-    private final ContentDatabase contentDatabase = new ContentDatabase();
+public class ContentManager implements Manager{
+    private static ContentManager instance;
+    private final ContentDatabase contentDatabase;
+
+    // Singleton
+    public static ContentManager getInstance() {
+        if(instance == null) {
+            instance = new ContentManager();
+        }
+        return instance;
+    }
+    
+    private ContentManager() {
+        contentDatabase = new ContentDatabase();
+    }
     
     
     public ArrayList<Story> getStories(String userID) {
@@ -32,7 +48,10 @@ public class ContentManager {
         return contentDatabase.getAllRecords();
     }
     
-    public void createContent(Content content) {
+    public void createContent(ContentType type, String userId, String text, String path) {
+        ContentFactoryData contentFactoryData= new ContentFactoryData(type, userId, text, path);
+        ContentFactory contentFactory = new ContentFactory();
+        Content content = contentFactory.create(contentFactoryData);
         contentDatabase.insertRecord(content);
     }
     
@@ -67,6 +86,18 @@ public class ContentManager {
 
         return friendsStories;
     }
+
+    @Override
+    public void refresh() {
+        contentDatabase.refreshRecords();
+    }
+
+    @Override
+    public void save() {
+        contentDatabase.saveRecords();
+    }
+    
+    
 
     
 }

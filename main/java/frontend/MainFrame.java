@@ -12,14 +12,15 @@ import managers.*;
 public class MainFrame extends javax.swing.JFrame {
     private User user;
     
-    private UserManager userManager;
-    private ProfileManager profileManager;
-    private FriendshipManager friendshipManager;
-    private ContentManager contentManager;
+    // Managers
+    private final AccountManager accountManager;
+    private final FriendshipManager friendshipManager;
+    private final ContentManager contentManager;
     
     private final CardLayout cardLayout;
     private final JPanel mainPanel;
     
+    // Panels to be displayed as pages
     private final SignupPanel signupPanel;
     private final LoginPanel loginPanel;
     private final ProfilePanel profilePanel;
@@ -29,7 +30,9 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         
         user = null;
-        refreshManagers();
+        accountManager =  AccountManager.getInstance();
+        friendshipManager = FriendshipManager.getInstance();
+        contentManager = ContentManager.getInstance();
         
         initComponents();
         
@@ -59,10 +62,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void refreshManagers() {
-        userManager = new UserManager();
-        profileManager = new ProfileManager();
-        contentManager = new ContentManager();
-        friendshipManager = new FriendshipManager();
+        accountManager.refresh();
+        contentManager.refresh();
+        friendshipManager.refresh();
     }
     
     private void setAllPanels() {
@@ -75,7 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public void switchToSignupPage() {
-        refreshManagers();
+       refreshManagers();
        cardLayout.show(mainPanel, "SignupPanel");
        signupPanel.startSignup();
     }
@@ -113,12 +115,8 @@ public class MainFrame extends javax.swing.JFrame {
         return user;
     }
 
-    public UserManager getUserManager() {
-        return userManager;
-    }
-
-    public ProfileManager getProfileManager() {
-        return profileManager;
+    public AccountManager getAccountManager() {
+        return accountManager;
     }
 
     public FriendshipManager getFriendshipManager() {
@@ -130,13 +128,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public void updateUser() {
-        user = profileManager.getRecord(user.getUserId());
+        user = accountManager.getRecord(user.getUserId());
     }
     
     
     public void logout() {
         if(user != null)
-            userManager.logout(user.getUserId());
+            accountManager.logout(user.getUserId());
+        user = null;
     }
     
     

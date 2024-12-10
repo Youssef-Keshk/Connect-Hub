@@ -1,7 +1,7 @@
 package entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import statuses.FriendshipStatus;
+import enums.FriendshipStatus;
 
 
 public class Friendship {

@@ -9,6 +9,7 @@ import java.awt.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import enums.ContentType;
 
 
 
@@ -16,22 +17,22 @@ public class NewsFeedPanel extends javax.swing.JPanel {
     private final MainFrame parent;
     private String userId;
     private ArrayList<String> friendsIDs;
-    private ContentManager contentManager;
-    private ProfileManager profileManager;
-    private FriendshipManager friendshipManager;
+    private final ContentManager contentManager;
+    private final AccountManager accountManager;
+    private final FriendshipManager friendshipManager;
     private String newContentPhotopath = "";
     
     public NewsFeedPanel(MainFrame parent) {
         initComponents();
         this.parent = parent;
+        friendshipManager = parent.getFriendshipManager();
+        contentManager = parent.getContentManager();
+        accountManager = parent.getAccountManager();
         friendsContentPanel.setLayout(new javax.swing.BoxLayout(friendsContentPanel, javax.swing.BoxLayout.Y_AXIS)); 
     }
     
     public void startNewsFeed() {
-        resetLabels();
-        friendshipManager = parent.getFriendshipManager();
-        contentManager = parent.getContentManager();
-        profileManager = parent.getProfileManager();
+        resetLabels();    
         userId = parent.getUser().getUserId();
         friendsIDs = friendshipManager.getAllFriends(userId);
         addPanels();
@@ -57,8 +58,8 @@ public class NewsFeedPanel extends javax.swing.JPanel {
     ArrayList<String> friendsIds = friendshipManager.getAllFriends(userId);
     ArrayList<User> friends = new ArrayList<>();
         for(String id : friendsIds) {
-            friends.add(profileManager.getRecord(id));
-            System.out.println(profileManager.getRecord(id));
+            friends.add(accountManager.getRecord(id));
+            System.out.println(accountManager.getRecord(id));
         }
     friendsPanel.removeAll();
 
@@ -78,7 +79,7 @@ public class NewsFeedPanel extends javax.swing.JPanel {
         ArrayList<String> suggestedIds = friendshipManager.suggestFriends(userId);
         ArrayList<User> suggestedFriends = new ArrayList<>();
         for(String id : suggestedIds) {
-            suggestedFriends.add(profileManager.getRecord(id));
+            suggestedFriends.add(accountManager.getRecord(id));
         }
         
         suggestedFriendsPanel.removeAll();
@@ -130,17 +131,11 @@ public class NewsFeedPanel extends javax.swing.JPanel {
         return null;
     }
     
-    public void createContent(String text, Class type) {
-        if(type == Post.class) {
-            Post post = new Post(userId, text, newContentPhotopath);
-            contentManager.createContent(post);
-        }
-        else if(type == Story.class) {
-            Story story = new Story(userId, text, newContentPhotopath);
-            contentManager.createContent(story);
-        }
+    public void createContent(String text, ContentType type) {
+        contentManager.createContent(type, userId, text, newContentPhotopath);
         newContentPhotopath = "";
-        newContentTextArea.setText("");       
+        newContentTextArea.setText("What's on your mind ?");
+        newContentTextArea.setForeground(Color.GRAY);    
     }
     
     public void viewStories() {
@@ -461,12 +456,12 @@ public class NewsFeedPanel extends javax.swing.JPanel {
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postButtonActionPerformed
         String text = newContentTextArea.getText();
-        createContent(text, Post.class);
+        createContent(text, ContentType.POST);
     }//GEN-LAST:event_postButtonActionPerformed
 
     private void storyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storyButtonActionPerformed
         String text = newContentTextArea.getText();
-        createContent(text, Story.class);
+        createContent(text, ContentType.STORY);
     }//GEN-LAST:event_storyButtonActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed

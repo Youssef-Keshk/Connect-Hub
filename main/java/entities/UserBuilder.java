@@ -1,7 +1,7 @@
 package entities;
 
 import authenticators.PasswordHasher;
-import statuses.UserStatus;
+import enums.UserStatus;
 import databases.UserCount;
 import java.time.LocalDate;
 

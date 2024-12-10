@@ -1,13 +1,26 @@
 package managers;
 
-
 import entities.Friendship;
-import statuses.FriendshipStatus;
+import enums.FriendshipStatus;
 import databases.FriendshipDatabase;
 import java.util.ArrayList;
 
-public class FriendshipManager {
-    private final FriendshipDatabase friendshipDataBase = new FriendshipDatabase();
+public class FriendshipManager implements Manager{
+    private static FriendshipManager instance;
+    private final FriendshipDatabase friendshipDataBase;
+    
+    // Singleton
+    public static FriendshipManager getInstance() {
+        if(instance == null) {
+            instance = new FriendshipManager();
+        }
+        return instance;
+    }
+
+    private FriendshipManager() {
+        friendshipDataBase = new FriendshipDatabase();
+    }
+      
     
     public void sendRequest(String senderID, String receiverID) {
         Friendship checkingAlreadySentRequest = friendshipDataBase.getFriendshipRequest(receiverID, senderID);
@@ -103,5 +116,17 @@ public class FriendshipManager {
     public ArrayList<String> getAllSentFriends(String userId) {
         return friendshipDataBase.getReceivedRequests(userId);
     }
+
+    @Override
+    public void refresh() {
+        friendshipDataBase.refreshRecords();
+    }
+
+    @Override
+    public void save() {
+        friendshipDataBase.saveRecords();
+    }
+    
+    
 
 }

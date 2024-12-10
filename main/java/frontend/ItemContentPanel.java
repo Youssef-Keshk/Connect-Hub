@@ -1,7 +1,7 @@
 package frontend;
 
 import entities.Content;
-import managers.ProfileManager;
+import managers.AccountManager;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.MediaTracker;
@@ -20,11 +20,11 @@ public class ItemContentPanel extends javax.swing.JPanel {
 
     public ItemContentPanel(MainFrame parent, Content content) {
         String userId = content.getAuthorId();
-        ProfileManager profileManager = parent.getProfileManager();
+        AccountManager accountManager = parent.getAccountManager();
         
         
-        username = profileManager.getUsername(userId);
-        profilePath = profileManager.getRecord(userId).getProfile().getProfilePhotoPath();
+        username = accountManager.getUsername(userId);
+        profilePath = accountManager.getRecord(userId).getProfile().getProfilePhotoPath();
         
         if(username.isEmpty() || profilePath.isEmpty())
             throw new InputMismatchException(userId);
@@ -46,9 +46,7 @@ public class ItemContentPanel extends javax.swing.JPanel {
         usernameLabel.setText(username);
         dateLabel.setText(time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         textArea.setText(text);
-        
-       
-      
+ 
         setProfilePic();
         setImage();
     }

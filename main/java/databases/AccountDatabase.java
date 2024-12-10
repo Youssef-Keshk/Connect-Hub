@@ -2,9 +2,9 @@ package databases;
 
 import entities.User;        
         
-public class UserDatabase extends DatabaseHandler<User>{
+public class AccountDatabase extends DatabaseHandler<User>{
     
-    public UserDatabase(){
+    public AccountDatabase(){
         super(FilePaths.USERS_FILEPATH, User.class);
     }
     

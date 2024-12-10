@@ -8,12 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import managers.FriendshipManager;
-import managers.ProfileManager;
+import managers.AccountManager;
 
 
 public class FriendsPanel extends javax.swing.JPanel {
     private final MainFrame parent;
-    private ProfileManager profileManager;
+    private AccountManager accountManager;
     private FriendshipManager friendshipManager;
     
     public FriendsPanel(MainFrame parent) {
@@ -23,7 +23,7 @@ public class FriendsPanel extends javax.swing.JPanel {
     
     public void startFriends() {
         resetPanels();
-        profileManager = parent.getProfileManager();
+        accountManager = parent.getAccountManager();
         friendshipManager = parent.getFriendshipManager();
         viewFriends();
         viewRequests();
@@ -49,7 +49,7 @@ public class FriendsPanel extends javax.swing.JPanel {
             // Create the list of friend User objects
             ArrayList<User> friends = new ArrayList<>();
             for (String id : friendsIds) {
-                friends.add(profileManager.getRecord(id));
+                friends.add(accountManager.getRecord(id));
             }
             // Create or retrieve the AllFriendsPanel instance
             AllFriendsPanel allFriendPanel = new AllFriendsPanel(friends, parent, false);
@@ -75,7 +75,7 @@ public class FriendsPanel extends javax.swing.JPanel {
             // Create the list of requested User objects
             ArrayList<User> requested = new ArrayList<>();
             for (String id : requestedIds) {
-                requested.add(profileManager.getRecord(id));
+                requested.add(accountManager.getRecord(id));
             }
 
             // Create or retrieve the AllRequestedPanel instance

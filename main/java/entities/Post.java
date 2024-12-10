@@ -2,11 +2,11 @@ package entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import databases.PostCount;
-
+import enums.ContentType;
 
 public class Post extends Content{
     @JsonProperty("type")
-    private final String type = "post";
+    private final ContentType type = ContentType.POST;
     
     public Post(){}
     

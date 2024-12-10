@@ -4,19 +4,19 @@ import java.awt.CardLayout;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import managers.ProfileManager;
+import managers.AccountManager;
 
 
 public class UpdateProfileDataDialoge extends javax.swing.JDialog {
     private final CardLayout cardLayout;
     private final JPanel mainPanel;
-    private final ProfileManager profileManager;
+    private final AccountManager accountManager;
     private final String userId;
     
     public UpdateProfileDataDialoge(MainFrame parent, String title, boolean modal) {
         super(parent, modal);
         userId = parent.getUser().getUserId();        
-        this.profileManager = parent.getProfileManager();
+        this.accountManager = parent.getAccountManager();
         
         initComponents();
         setTitle(title);
@@ -46,26 +46,26 @@ public class UpdateProfileDataDialoge extends javax.swing.JDialog {
     }
     
     public void updateBio(String bio) {
-        profileManager.updateBio(userId, bio);
+        accountManager.updateBio(userId, bio);
         dispose();
     }
     
     public void updatePassword(String oldPassword, String newPassword) {
-        profileManager.updatePassword(userId, oldPassword, newPassword);
+        accountManager.updatePassword(userId, oldPassword, newPassword);
         dispose();
     }
     
     public void updateProfilePic() {
         setVisible(false);
         String path = getNewPath("profile photo");
-        profileManager.updateProfilePhoto(userId, path);
+        accountManager.updateProfilePhoto(userId, path);
         dispose();
     }
     
     public void updateCoverPic() {
         setVisible(false);
         String path = getNewPath("cover photo");
-        profileManager.updateCoverPhoto(userId, path);
+        accountManager.updateCoverPhoto(userId, path);
         dispose();
     }
     

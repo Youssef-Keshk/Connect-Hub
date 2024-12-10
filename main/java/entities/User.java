@@ -1,6 +1,6 @@
 package entities;
 
-import statuses.UserStatus;
+import enums.UserStatus;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -2,15 +2,28 @@ package managers;
 
 import authenticators.PasswordHasher;
 import entities.User;
-import statuses.UserStatus;
-import databases.UserDatabase;
+import enums.UserStatus;
+import databases.AccountDatabase;
 
 
-public class UserManager {
-    private final UserDatabase userDataBase = new UserDatabase();
+ class UserManager{
+    private static UserManager instance;
+    private final AccountDatabase accountDatabase;
+    
+    // Singleton
+    public static UserManager getInstance(AccountDatabase userDataBase) {
+        if(instance == null) {
+            instance = new UserManager(userDataBase);
+        }
+        return instance;
+    }
+
+    public UserManager(AccountDatabase userDataBase) {
+        this.accountDatabase = userDataBase;
+    }
     
     public boolean signup(User user) {
-        boolean success = userDataBase.insertRecord(user);
+        boolean success = accountDatabase.insertRecord(user);
         if(success) {
             user.setStatus(UserStatus.ONLINE);
             return true;
@@ -20,28 +33,21 @@ public class UserManager {
     
     public User login(String username, String password) {
         String pass = PasswordHasher.getHashedPassword(password);
-        User user = userDataBase.getRecord(username, pass);
-        if(user != null) {
-            user.setStatus(UserStatus.ONLINE);
-            save();
-        }        
+        User user = accountDatabase.getRecord(username, pass);
+        if(user != null)
+            user.setStatus(UserStatus.ONLINE); 
         return user;
     }
     
     public boolean logout(String userID) {
-        userDataBase.refreshRecords();
-        User user = userDataBase.getRecord(userID);
+        accountDatabase.refreshRecords();
+        User user = accountDatabase.getRecord(userID);
         if(user != null) {
             user.setStatus(UserStatus.OFFLINE);
-            save();
             return true;
         }
         return false;
     }
-    
-    public void save() {
-        userDataBase.saveRecords();
-    }
-    
+
 
 }

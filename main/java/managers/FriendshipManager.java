@@ -72,7 +72,7 @@ public class FriendshipManager implements Manager{
     }
     
     public boolean removeFriend(String userId1, String userId2) {
-        Friendship friendship = friendshipDataBase.getFriendship(userId1, userId2);
+        Friendship friendship = friendshipDataBase.getActiveFriendship(userId1, userId2);
         try {
             friendshipDataBase.removeRecord(friendship);
             friendshipDataBase.saveRecords();
@@ -119,6 +119,10 @@ public class FriendshipManager implements Manager{
     
     public ArrayList<String> getAllPendingFriends(String userID) {
         return friendshipDataBase.getSentRequests(userID);    
+    }
+    
+    public Friendship getFriendshipOfTwoUsers(String userID1, String userID2) {
+        return friendshipDataBase.getFriendshipOfTwoUsers(userID1, userID2);
     }
     
     
@@ -189,7 +193,12 @@ public class FriendshipManager implements Manager{
         return suggester.suggest(userID);     
     }
     
-    
  
+    public boolean removeRequest(String groupId, String userId) {
+        Friendship friendship = friendshipDataBase.getGroupFriendShipRequest(groupId, userId);
+        if(friendship == null)
+            return false;
+        return friendshipDataBase.removeRecord(friendship);
+    }
 
 }

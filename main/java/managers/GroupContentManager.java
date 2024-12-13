@@ -2,6 +2,7 @@ package managers;
 
 import databases.GroupContentDatabase;
 import entities.GroupPost;
+import java.util.ArrayList;
 
 
 public class GroupContentManager implements Manager{
@@ -76,5 +77,12 @@ public class GroupContentManager implements Manager{
     public GroupPost getRecord(String contentId) {
         return groupContentDatabase.getPost(contentId);
     }
+    
+    // Fetches all posts of a group
+    public ArrayList<GroupPost> getPosts(String groupID) {
+        return groupContentDatabase.getPosts(groupID);
+    } 
+    
+    
     
 }

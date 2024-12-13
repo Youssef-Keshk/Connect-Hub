@@ -2,6 +2,7 @@ package managers;
 
 import databases.GroupDatabase;
 import entities.Group;
+import java.util.ArrayList;
 
 public class GroupManager implements Manager {
     private static GroupManager instance;
@@ -108,5 +109,11 @@ public class GroupManager implements Manager {
             return groupDatabase.removeRecord(group);
         return false;
     }
+    
+    // Fetches users with matching usernames
+   public ArrayList<Group> searchGroups(String searchKey) {
+       SearcherAbstractionImpl<Group> searcher = new SearcherAbstractionImpl<>(new GroupSearcher());
+       return searcher.search(searchKey);
+   }
 
 }

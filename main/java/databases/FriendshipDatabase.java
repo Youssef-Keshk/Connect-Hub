@@ -45,9 +45,21 @@ public class FriendshipDatabase extends DatabaseHandler<Friendship>{
         return null;
     }
     
-    public Friendship getFriendship(String userID1, String userID2) {
+    // Returns relation between two users
+    public Friendship getFriendshipOfTwoUsers(String userID1, String userID2) {
         for(Friendship friendship : records) {
-            if(friendship.getStatus() == FriendshipStatus.ACCEPTED && friendship.getType() == FriendshipType.USERS)
+            if(friendship.getType()== FriendshipType.USERS)
+                if(
+                (friendship.getSenderId().equals(userID1) && friendship.getReceiverId().equals(userID2)) ||
+                (friendship.getSenderId().equals(userID2) && friendship.getReceiverId().equals(userID1))
+                )return friendship;   
+        }
+        return null;
+    }
+    
+    public Friendship getActiveFriendship(String userID1, String userID2) {
+        for(Friendship friendship : records) {
+            if(friendship.getStatus() == FriendshipStatus.ACCEPTED)
                 if(
                 (friendship.getSenderId().equals(userID1) && friendship.getReceiverId().equals(userID2)) ||
                 (friendship.getSenderId().equals(userID2) && friendship.getReceiverId().equals(userID1))

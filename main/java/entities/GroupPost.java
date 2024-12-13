@@ -2,10 +2,13 @@ package entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import databases.GroupPostCount;
+import enums.ContentType;
 
 public class GroupPost extends Content{
     @JsonProperty
     private String groupId;
+    @JsonProperty("type")
+    private final ContentType type = ContentType.GROUP_POST;
  
     public GroupPost(){}
     

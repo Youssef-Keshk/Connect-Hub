@@ -22,14 +22,6 @@ public class GroupDatabase extends DatabaseHandler<Group>{
                 return group;
         return null;
     }
-    
-    public ArrayList<String> getAllGroupNames() {
-    ArrayList<String> groupNames = new ArrayList<>();
-        for (Group group : records) {
-            groupNames.add(group.getGroupName());
-        }
-
-    return groupNames;
-}
+ 
 
 }

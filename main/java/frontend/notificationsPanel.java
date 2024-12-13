@@ -2,12 +2,8 @@ package frontend;
 
 import entities.Notification;
 import managers.NotificationManager;
-import java.awt.BorderLayout;
-import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 public class NotificationsPanel extends javax.swing.JPanel {
 

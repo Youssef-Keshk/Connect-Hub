@@ -3,18 +3,18 @@ package managers;
 import databases.GroupDatabase;
 import entities.Group;
 
-public class Groupmanger implements Manager {
-    private static Groupmanger instance;
+public class GroupManager implements Manager {
+    private static GroupManager instance;
     private final GroupDatabase groupDatabase;
 
-    public static Groupmanger getInstance() {
+    public static GroupManager getInstance() {
         if(instance == null) {
-            instance = new Groupmanger();
+            instance = new GroupManager();
         }
         return instance;
     } 
     
-    private Groupmanger() {
+    private GroupManager() {
         groupDatabase = new GroupDatabase();
     }
     
@@ -32,6 +32,7 @@ public class Groupmanger implements Manager {
     public Group getRecord(String groupId) {
         return groupDatabase.getRecord(groupId);
     }
+   
     
     // Add new member to a group
     public boolean addMember(String groupId, String adminId, String userId) {

@@ -1,53 +1,66 @@
 package frontend;
 
 import java.awt.Color;
-import managers.AccountManager;
-import managers.GroupManager;
+import entities.User;
+import entities.Group;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import javax.swing.JPanel;
 
 
 public class SearchPanel extends javax.swing.JPanel {
     private final MainFrame parent;
-    private final AccountManager accountManager;
-    private final GroupManager groupManager;
-    private String text;
+    private ArrayList<User> matchingUsers;
+    private ArrayList<Group> matchingGroups;
     
     public SearchPanel(MainFrame parent) {
         this.parent = parent;
-        accountManager = parent.getAccountManager();
-        groupManager = parent.getGroupManager();
         initComponents();
     }
     
     public void startSearch() {
+        matchingUsers = new ArrayList<>();
+        matchingGroups = new ArrayList<>();
         resetPanels();
     }
     
     public void resetPanels() {
+        searchTextField.setText("Search Connect-Hub");
+        searchTextField.setForeground(Color.GRAY);
+        searchButton.setFocusable(true);
+        searchButton.requestFocusInWindow();
         containerPanel.removeAll();
         revalidate();
         repaint();
     }
     
-    public void search(String text) {
-        
+    public void search(String searchKey) {
+        containerPanel.removeAll();
+        revalidate();
+        repaint();
+        matchingUsers = parent.getAccountManager().searchUsers(searchKey);
+        matchingGroups = parent.getGroupManager().searchGroups(searchKey);
+        viewUsers();
+        viewGroups();
     }
-//    public void searchForUsers(String username) {
-//        ArrayList<User> users = accountManager.searchForUsers(username);
-//        viewUsers(users);
-//    }
-//    
-//    public void searchForGroups(String groupName) {
-//        ArrayList<Group> groups = groupManager.searchForGroups(groupName);
-//        viewGroups(groups);
-//    }
-//    
-//    public void viewUsers(ArrayList<User> users) {
-//        
-//    }
-//    
-//    public void viewGroups(ArrayList<Group> groups) {
-//        
-//    }
+   
+    public void viewUsers() {
+        AllSearchedUsers asu = new AllSearchedUsers(parent, matchingUsers);
+        
+        JPanel searchedUsersPanel = new JPanel();
+        searchedUsersPanel.setLayout(new BorderLayout());
+        searchedUsersPanel.add(asu, BorderLayout.CENTER);
+        containerPanel.add(searchedUsersPanel, java.awt.BorderLayout.WEST);
+    }
+    
+    public void viewGroups() {
+        AllSearchedGroups asg = new AllSearchedGroups(parent, matchingGroups);
+        
+        JPanel searchedGroupsPanel = new JPanel();
+        searchedGroupsPanel.setLayout(new BorderLayout());
+        searchedGroupsPanel.add(asg, BorderLayout.CENTER);
+        containerPanel.add(searchedGroupsPanel, java.awt.BorderLayout.EAST);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

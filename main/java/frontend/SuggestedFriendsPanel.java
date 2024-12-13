@@ -14,7 +14,7 @@ public class SuggestedFriendsPanel extends javax.swing.JPanel {
     ArrayList<User> suggestedsFriends;
     MainFrame parent;
  
-    public SuggestedFriendsPanel(ArrayList<User> suggestedsFriends,MainFrame parent) {
+    public SuggestedFriendsPanel(ArrayList<User> suggestedsFriends, MainFrame parent) {
         this.suggestedsFriends = suggestedsFriends;
         this.parent = parent;
         initComponents();

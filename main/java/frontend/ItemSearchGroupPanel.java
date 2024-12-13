@@ -9,20 +9,22 @@ import javax.swing.ImageIcon;
 
 public class ItemSearchGroupPanel extends javax.swing.JPanel {
     private final MainFrame parent;
+    private final Group group;
     private final String groupID;
     private final String groupName;
     private final String groupPhotoPath;
     
     public ItemSearchGroupPanel(MainFrame parent, Group group) {
         this.parent = parent;
+        this.group = group;
         this.groupID = group.getGroupId();
         this.groupName = group.getGroupName();
         this.groupPhotoPath = group.getPhotoPath();
         
         initComponents();
         
-//        setPreferredSize(new Dimension(220, 60));
-        setMinimumSize(new Dimension(150, 60));
+//        setPreferredSize(new Dimension(180, 60));
+//        setMinimumSize(new Dimension(180, 40));
 //        setMaximumSize(new Dimension(180, 40));
 //
 //        setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -38,7 +40,7 @@ public class ItemSearchGroupPanel extends javax.swing.JPanel {
         try {
             ImageIcon icon = new ImageIcon(groupPhotoPath);
             if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
-                Image image = icon.getImage().getScaledInstance(40, 25, Image.SCALE_SMOOTH);
+                Image image = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
                 groupPicLabel.setIcon(new ImageIcon(image));
             } else {
                 groupPicLabel.setText("No Image");
@@ -50,7 +52,7 @@ public class ItemSearchGroupPanel extends javax.swing.JPanel {
     }  
     
     public void viewProfile() {
-        parent.switchToRandomGroupProfile(groupID);
+        parent.switchToRandomGroupProfile(group);
     }
 
     
@@ -61,6 +63,9 @@ public class ItemSearchGroupPanel extends javax.swing.JPanel {
         groupPicLabel = new javax.swing.JLabel();
         groupNameLabel = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(180, 40));
+        setMinimumSize(new java.awt.Dimension(150, 60));
+        setPreferredSize(new java.awt.Dimension(220, 60));
         setLayout(new java.awt.BorderLayout());
 
         groupPicLabel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 102)));

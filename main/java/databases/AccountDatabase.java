@@ -1,6 +1,7 @@
 package databases;
 
 import entities.User;        
+import java.util.ArrayList;
         
 public class AccountDatabase extends DatabaseHandler<User>{
     
@@ -56,4 +57,11 @@ public class AccountDatabase extends DatabaseHandler<User>{
         return success;
     }
     
+    public ArrayList<String> getAllUsernames() {
+    ArrayList<String> usernames = new ArrayList<>();
+    for (User user : records) {
+        usernames.add(user.getUsername());
+    }
+    return usernames;
+}
 }

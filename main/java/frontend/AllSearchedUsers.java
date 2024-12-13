@@ -56,13 +56,14 @@ public class AllSearchedUsers extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
+        usersContainerPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         usersContainerPanel.setLayout(new javax.swing.BoxLayout(usersContainerPanel, javax.swing.BoxLayout.LINE_AXIS));
         add(usersContainerPanel, java.awt.BorderLayout.CENTER);
 
         titleLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Best Matching Users");
-        titleLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        titleLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         add(titleLabel, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 

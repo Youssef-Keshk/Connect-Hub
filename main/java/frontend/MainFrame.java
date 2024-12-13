@@ -1,5 +1,6 @@
 package frontend;
 
+import entities.Group;
 import entities.User;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -29,7 +30,9 @@ public class MainFrame extends javax.swing.JFrame {
     private final ProfilePanel profilePanel;
     private final NewsFeedPanel newsFeedPanel;
     private final FriendsPanel friendsPanel;
-//    private final SearchPanel searchPanel;
+    private final SearchPanel searchPanel;
+    private final RandomGroupProfilePanel groupProfilePanel;
+    private final RandomUserProfilePanel userProfilePanel;
 //    private final NoficationsPanel noficationsPanel;
     
     public MainFrame() {
@@ -51,7 +54,10 @@ public class MainFrame extends javax.swing.JFrame {
         profilePanel = new ProfilePanel(this);
         newsFeedPanel = new NewsFeedPanel(this);
         friendsPanel = new FriendsPanel(this);
-//        searchPanel = new SearchPanel(this);
+        searchPanel = new SearchPanel(this);
+        groupProfilePanel = new RandomGroupProfilePanel(this);
+        userProfilePanel = new RandomUserProfilePanel(this);
+        
 //        noficationsPanel = new NoficationsPanel(this);
         
         setAllPanels();
@@ -86,7 +92,10 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(profilePanel, "ProfilePanel");
         mainPanel.add(newsFeedPanel, "NewsFeedPanel");
         mainPanel.add(friendsPanel, "FriendsPanel");
-//        mainPanel.add(searchPanel, "SearchPanel");
+        mainPanel.add(searchPanel, "SearchPanel");
+        mainPanel.add(groupProfilePanel, "RandomGroupProfilePanel");
+        mainPanel.add(userProfilePanel, "RandomUserProfilePanel");
+        
 //        mainPanel.add(noficationsPanel, "NoficationsPanel");
        
     }
@@ -94,24 +103,21 @@ public class MainFrame extends javax.swing.JFrame {
     public void switchToSignupPage() {
        refreshManagers();
        cardLayout.show(mainPanel, "SignupPanel");
-       setPreferredSize(new Dimension(640, 450));
-       pack();
+       resizeFrame(new Dimension(640, 450));
        signupPanel.startSignup();
     }
     
     public void switchToLoginPage() {
         refreshManagers();
         cardLayout.show(mainPanel, "LoginPanel");
-        setPreferredSize(new Dimension(640, 450));
-        pack();
+        resizeFrame(new Dimension(640, 450));
         loginPanel.startLogin();
     }
     
     public void switchToProfilePage() {
        refreshManagers();
        cardLayout.show(mainPanel, "ProfilePanel");
-       setPreferredSize(new Dimension(1000, 600));
-       pack();
+       resizeFrame(new Dimension(1000, 600));
        profilePanel.startProfile();
        
     }
@@ -119,24 +125,22 @@ public class MainFrame extends javax.swing.JFrame {
     public void switchToNewsFeedPage() {
         refreshManagers();
         cardLayout.show(mainPanel, "NewsFeedPanel");
-        setPreferredSize(new Dimension(1000, 600));
-        pack();
+        resizeFrame(new Dimension(1000, 600));
         newsFeedPanel.startNewsFeed();
     }
     
     public void switchToFriendsPage() {
         refreshManagers();
         cardLayout.show(mainPanel, "FriendsPanel");   
-        setPreferredSize(new Dimension(1000, 600));
-        pack();
+        resizeFrame(new Dimension(1000, 600));
         friendsPanel.startFriends();
     }
     
     public void switchToSearchPage() {
-//        resizeFrame(SearchPanel);
-        refreshManagers();
-//        cardLayout.show(mainPanel, "SearchPanel");   
-//        searchPanel.startSearch();
+       refreshManagers();
+       cardLayout.show(mainPanel, "SearchPanel");
+       resizeFrame(new Dimension(640, 450));
+       searchPanel.startSearch();
     }
     
     public void switchToNoficationsPage() {
@@ -146,13 +150,21 @@ public class MainFrame extends javax.swing.JFrame {
 //        noficationsPanel.startNofications();
     }
     
-    public void switchToRandomUserProfile(String userID) {
-//        resizeFrame();
+    public void switchToRandomUserProfile(User user) {
+        refreshManagers();
+       cardLayout.show(mainPanel, "RandomUserProfilePanel");
+       resizeFrame(new Dimension(650, 500));
+       userProfilePanel.startProfile(user);
         
     }
     
-    public void switchToRandomGroupProfile(String groupID) {
-//        resizeFrame();
+    public void switchToRandomGroupProfile(Group searchedGroup) {
+       refreshManagers();
+       cardLayout.show(mainPanel, "RandomGroupProfilePanel");
+       resizeFrame(new Dimension(650, 500));
+       groupProfilePanel.startGroupProfile(searchedGroup,
+               friendshipManager.getGroupRequests(searchedGroup.getGroupId()).contains(user.getUserId()) 
+                       || searchedGroup.getMembersIds().contains(user.getUserId()));
         
     }
     
@@ -195,14 +207,11 @@ public class MainFrame extends javax.swing.JFrame {
         user = null;
     }
     
-    private void resizeFrame(JPanel panel) {
-    Dimension preferredSize = panel.getPreferredSize();
-    if (preferredSize == null || preferredSize.width == 0 || preferredSize.height == 0) {
-        preferredSize = new Dimension(600, 400);
+    private void resizeFrame(Dimension dimension) {
+       setPreferredSize(dimension);
+       pack();
+       setLocationRelativeTo(null);
     }
-    setSize(preferredSize.width, preferredSize.height);
-    setLocationRelativeTo(null);
-}
 
     
     @SuppressWarnings("unchecked")

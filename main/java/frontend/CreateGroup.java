@@ -1,6 +1,11 @@
 package frontend;
 
+import databases.FilePaths;
 import entities.User;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import javax.swing.ImageIcon;
 
 
 public class CreateGroup extends javax.swing.JPanel {
@@ -215,32 +220,32 @@ public class CreateGroup extends javax.swing.JPanel {
     }//GEN-LAST:event_ProfileButtonActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
-        boolean success;
-        try{
-            setValues();
-            success = validateData();
-            if(!success)
-            return;
-        }catch(NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Some feilds are empty!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Profile profile = createProfile();
-        User user = createUser(profile);
-
-        success = accountManager.signup(user);
-
-        if(success){
-            parent.setUser(user);
-            parent.switchToProfilePage();
-        }
-        else
-        JOptionPane.showMessageDialog(null, "Username or password already used!", "Error", JOptionPane.ERROR_MESSAGE);
+//        boolean success;
+//        try{
+//            setValues();
+//            success = validateData();
+//            if(!success)
+//            return;
+//        }catch(NullPointerException e) {
+//            JOptionPane.showMessageDialog(null, "Some feilds are empty!", "Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+//
+//        Profile profile = createProfile();
+//        User user = createUser(profile);
+//
+//        success = accountManager.signup(user);
+//
+//        if(success){
+//            parent.setUser(user);
+//            parent.switchToProfilePage();
+//        }
+//        else
+//        JOptionPane.showMessageDialog(null, "Username or password already used!", "Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_createButtonActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
-        newContentPhotopath = getNewPath("Choose a photo");
+        //newContentPhotopath = getNewPath("Choose a photo");
     }//GEN-LAST:event_uploadButtonActionPerformed
 
 

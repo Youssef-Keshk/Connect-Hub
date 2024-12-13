@@ -602,7 +602,7 @@ public class NewsFeedPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void notificationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificationsButtonActionPerformed
-        parent.switchToNoficationsPage();
+        parent.switchToNotificationsPage();
     }//GEN-LAST:event_notificationsButtonActionPerformed
 
 

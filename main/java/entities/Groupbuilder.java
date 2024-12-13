@@ -1,82 +1,43 @@
-package group;
+package entities;
 
-import databases.UserCount;
-
-import java.util.ArrayList;
+import databases.GroupCount;
 
 public class Groupbuilder {
-    private String ID;
-    private String name;
-    private String description;
-    private String photo;
-    private String groupAdmin;
-    private String primaryadmin;
-    private ArrayList<String> otheradmins;
-    private ArrayList<String> members;
-
-    public String getName() {
-        return name;
+  public String groupId;
+  public String groupName;
+  public String description;
+  public String photoPath;
+  public String primaryAdminId;
+  
+    public Groupbuilder groupId(String groupId) {
+        this.groupId = groupId;
+        return this;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    
+    public Groupbuilder groupName(String groupName) {
+        this.groupName = groupName;
+        return this;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+    
+    public Groupbuilder description(String description) {
         this.description = description;
+        return this;
+    }
+    
+    public Groupbuilder photoPath(String photoPath) {
+        this.photoPath = photoPath;
+        return this;
+    }
+    
+    public Groupbuilder primaryAdminId(String primaryAdminId) {
+        this.primaryAdminId = primaryAdminId;
+        return this;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getGroupAdmin() {
-        return groupAdmin;
-    }
-
-    public void setGroupAdmin(String groupAdmin) {
-        this.groupAdmin = groupAdmin;
-    }
-
-    public String getPrimaryadmin() {
-        return primaryadmin;
-    }
-
-    public void setPrimaryadmin(String primaryadmin) {
-        this.primaryadmin = primaryadmin;
-    }
-
-    public ArrayList<String> getOtheradmins() {
-        return otheradmins;
-    }
-
-    public void setOtheradmins(ArrayList<String> otheradmins) {
-        this.otheradmins = otheradmins;
-    }
-
-    public ArrayList<String> getMembers() {
-        return members;
-    }
-
-    public void setMembers(ArrayList<String> members) {
-        this.members = members;
-    }
-
-    public String getID() {
-        return ID;
-    }
 
     public Group build() {
         GroupCount groupCount = new GroupCount();
-        this.ID=("G" + groupCount.incrementAndGetCount());
+        this.groupId = ("G" + groupCount.incrementAndGetCount());
         return new Group(this);
     }
 }

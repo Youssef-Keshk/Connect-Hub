@@ -1,37 +1,51 @@
-package group;
+package entities;
 
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Group {
-  private   String ID;
-  private  String name;
-  private String description;
-  private String photo;
-  private String primaryadmin;
-  private ArrayList<String> otheradmins;
-  private ArrayList<String> members;
+    @JsonProperty
+    private String groupId;
+    @JsonProperty
+    private String groupName;
+    @JsonProperty
+    private String description;
+    @JsonProperty
+    private String photoPath;
+    @JsonProperty
+    private String primaryAdminId;
+    @JsonProperty
+    private ArrayList<String> coAdminsIds;
+    @JsonProperty
+    private ArrayList<String> membersIds;
 
 
+    public Group(){}
+     
     public Group(Groupbuilder builder) {
-        this.ID = builder.getID();
-        this.name = builder.getName();
-        this.description = builder.getDescription();
-        this.photo = builder.getPhoto();
-        this.primaryadmin = builder.getPrimaryadmin();
-        this.otheradmins = builder.getOtheradmins();
-        this.members = builder.getMembers();
+        this.groupId = builder.groupId;
+        this.groupName = builder.groupName;
+        this.description = builder.description;
+        this.photoPath = builder.photoPath;
+        this.primaryAdminId = builder.primaryAdminId;
+        this.coAdminsIds = new ArrayList<>();
+        this.membersIds = new ArrayList<>();
     }
 
     public static Groupbuilder builder() {
         return new Groupbuilder();
     }
 
-    public String getName() {
-        return name;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public String getDescription() {
@@ -42,39 +56,96 @@ public class Group {
         this.description = description;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
-    public String getPrimaryadmin() {
-        return primaryadmin;
+    public String getPrimaryAdminId() {
+        return primaryAdminId;
     }
 
-    public void setPrimaryadmin(String primaryadmin) {
-        this.primaryadmin = primaryadmin;
+    public ArrayList<String> getCoAdminsIds() {
+        return coAdminsIds;
     }
 
-    public ArrayList<String> getOtheradmins() {
-        return otheradmins;
+    public ArrayList<String> getMembersIds() {
+        return membersIds;
     }
-
-    public void setOtheradmins(ArrayList<String> otheradmins) {
-        this.otheradmins = otheradmins;
+    
+    public boolean addAdmin(String primaryAdminId) {
+        if(this.primaryAdminId == null) {
+            this.primaryAdminId = primaryAdminId;
+            return true;
+        }
+        return false;
     }
-
-    public ArrayList<String> getMembers() {
-        return members;
+    
+    // Method to add new member to group
+    public boolean addMember(String userId) {
+        if(!membersIds.contains(userId) && !coAdminsIds.contains(userId) && !primaryAdminId.equals(userId)) {
+            membersIds.add(userId);
+            return true;
+        }
+        return false;
     }
-
-    public void setMembers(ArrayList<String> members) {
-        this.members = members;
+    
+    // Method to remove member from group
+    public boolean removeMember(String memberId) {
+        return membersIds.remove(memberId);
     }
-
-    public String getID() {
-        return ID;
+    
+    // Method to remove co-admin from group
+    public boolean removeCoAdmin(String memberId) {
+        return coAdminsIds.remove(memberId);
     }
+    
+    
+    // Method to promote a user from member to co-admin
+    public boolean promoteMember(String memberId) {
+        if(!(membersIds.contains(memberId) && !coAdminsIds.contains(memberId) && !primaryAdminId.equals(memberId))) 
+            return false;
+        membersIds.remove(memberId);
+        return coAdminsIds.add(memberId);
+    }
+    
+    // Method to demote a user from co-admin to member
+    public boolean demoteCoAdmin(String coAdminId) {
+        if(!(!membersIds.contains(coAdminId) && coAdminsIds.contains(coAdminId) && !primaryAdminId.equals(coAdminId))) 
+            return false;
+        coAdminsIds.remove(coAdminId);
+        return membersIds.add(coAdminId);
+    }
+    
+    // Method to check if user is primary admin
+    public boolean isPrimaryAdmin(String userId) {
+        return primaryAdminId.equals(userId);
+    }
+    
+    // Method to check if user is co-admin
+    public boolean isCoAdmin(String userId) {
+        return coAdminsIds.contains(userId);
+    }
+    
+    // Method to check if user is has group authority
+    public boolean hasAuthority(String userId) {
+        return isPrimaryAdmin(userId) || isCoAdmin(userId);
+    }
+    
+    
+    @Override
+    public String toString() {
+        return "Group{" + "groupId=" + groupId 
+                + ", groupName=" + groupName 
+                + ", description=" + description 
+                + ", photoPath=" + photoPath 
+                + ", adminId=" + primaryAdminId 
+                + ", coAdminsIds=" + coAdminsIds 
+                + ", membersIds=" + membersIds + '}';
+    }
+    
+    
 }

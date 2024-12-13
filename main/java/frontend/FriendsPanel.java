@@ -13,18 +13,18 @@ import managers.AccountManager;
 
 public class FriendsPanel extends javax.swing.JPanel {
     private final MainFrame parent;
-    private AccountManager accountManager;
-    private FriendshipManager friendshipManager;
+    private final AccountManager accountManager;
+    private final FriendshipManager friendshipManager;
     
     public FriendsPanel(MainFrame parent) {
         this.parent = parent;
+        accountManager = parent.getAccountManager();
+        friendshipManager = parent.getFriendshipManager();
         initComponents();
     }
     
     public void startFriends() {
         resetPanels();
-        accountManager = parent.getAccountManager();
-        friendshipManager = parent.getFriendshipManager();
         viewFriends();
         viewRequests();
     }

@@ -2,6 +2,7 @@ package entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import enums.FriendshipStatus;
+import enums.FriendshipType;
 
 
 public class Friendship {
@@ -11,6 +12,8 @@ public class Friendship {
     private String receiverId;
     @JsonProperty
     private FriendshipStatus status;
+    @JsonProperty
+    private FriendshipType type;
     
     public Friendship(){}
     
@@ -18,6 +21,7 @@ public class Friendship {
         this.senderId = builder.senderId;
         this.receiverId = builder.receiverId;
         this.status = builder.status;
+        this.type = builder.type;
     }
     
     public static FriendshipBuilder builder() {
@@ -37,6 +41,10 @@ public class Friendship {
         return status;
     }
 
+    public FriendshipType getType() {
+        return type;
+    }
+    
     public void setStatus(FriendshipStatus status) {
         this.status = status;
     }

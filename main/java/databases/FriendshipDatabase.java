@@ -3,6 +3,7 @@ package databases;
 import enums.FriendshipStatus;
 import entities.Friendship;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 
 public class FriendshipDatabase extends DatabaseHandler<Friendship>{
@@ -106,5 +107,12 @@ public class FriendshipDatabase extends DatabaseHandler<Friendship>{
         return usersBlockingCurrentUser;
     }
     
+    
+    // Returns all friendships of a group
+    public ArrayList<Friendship> getGroupFriendships(String groupID) {
+        return records.stream()
+                .filter(friendship -> friendship.getReceiverId().equals(groupID))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
         
 }

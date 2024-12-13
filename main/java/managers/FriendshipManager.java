@@ -20,6 +20,16 @@ public class FriendshipManager implements Manager{
     private FriendshipManager() {
         friendshipDataBase = new FriendshipDatabase();
     }
+    
+    @Override
+    public void refresh() {
+        friendshipDataBase.refreshRecords();
+    }
+
+    @Override
+    public void save() {
+        friendshipDataBase.saveRecords();
+    }
       
     
     public void sendRequest(String senderID, String receiverID) {
@@ -117,16 +127,25 @@ public class FriendshipManager implements Manager{
         return friendshipDataBase.getReceivedRequests(userId);
     }
 
-    @Override
-    public void refresh() {
-        friendshipDataBase.refreshRecords();
-    }
-
-    @Override
-    public void save() {
-        friendshipDataBase.saveRecords();
+    // Returns all requests to join group
+    public ArrayList<String> getGroupRequests(String groupId) {
+        ArrayList<String> requests = new ArrayList<>();
+        ArrayList<Friendship> friendships = friendshipDataBase.getGroupFriendships(groupId);
+        for(Friendship f : friendships) 
+            if(f.getStatus().equals(FriendshipStatus.PENDING))
+                requests.add(f.getSenderId());
+        return requests;           
     }
     
-    
+    // Returns all current members of a group
+    public ArrayList<String> getGroupMembers(String groupId) {
+        ArrayList<String> members = new ArrayList<>();
+        ArrayList<Friendship> friendships = friendshipDataBase.getGroupFriendships(groupId);
+        for(Friendship f : friendships) 
+            if(f.getStatus().equals(FriendshipStatus.ACCEPTED))
+                members.add(f.getSenderId());
+        return members;           
+    }
+ 
 
 }

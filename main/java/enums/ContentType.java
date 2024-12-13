@@ -3,7 +3,8 @@ package enums;
 
 public enum ContentType {
     STORY("Story"),
-    POST("Post");
+    POST("Post"),
+    GROUP_POST("GroupPost");
 
     private final String type;
 

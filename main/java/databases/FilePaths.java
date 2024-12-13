@@ -13,5 +13,6 @@ public interface FilePaths {
     final String LEFT_ARROW_ICON = "src/main/java/icons/left.png";
     final String RIGHT_ARROW_ICON = "src/main/java/icons/right.png";
     final String UPLOAD_PHOTO_ICON = "src/main/java/icons/uploadPhoto.png";
+    final String NOTIFICATIONS_FILEPATH = "src/main/java/resources/notifications.json";
             
 }

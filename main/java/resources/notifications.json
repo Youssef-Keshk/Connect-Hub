@@ -1,0 +1,33 @@
+[ {
+  "isRead" : false,
+  "main" : {
+    "userId" : "U2",
+    "email" : "user2@example.com",
+    "username" : "Zeyad Essam",
+    "password" : "6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4",
+    "status" : "ONLINE",
+    "dateOfBirth" : [ 1995, 5, 15 ],
+    "profile" : {
+      "profilePhotoPath" : "src/main/java/icons/real-madrid-logo-wood-background.jpg",
+      "coverPhotoPath" : "src/main/java/icons/wallpaperflare.com_wallpaper.jpg",
+      "bio" : "Bio of user2"
+    }
+  },
+  "sender" : {
+    "userId" : "U5",
+    "email" : "an@gmail.com",
+    "username" : "Andrew",
+    "password" : "b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b",
+    "status" : "ONLINE",
+    "dateOfBirth" : [ 2004, 7, 25 ],
+    "profile" : {
+      "profilePhotoPath" : "src/main/java/icons/defaultProfilePhoto.png",
+      "coverPhotoPath" : "src/main/java/icons/defaultProfilePhoto.png",
+      "bio" : ""
+    }
+  },
+  "message" : "Andrew sent you a friend request.",
+  "userId" : "U2",
+  "read" : false,
+  "type" : "FRIEND_REQUEST"
+} ]

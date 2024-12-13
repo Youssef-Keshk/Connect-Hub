@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import entities.User;
 
 
-class FriendSuggester {
-    private final AccountDatabase userDataBase = new AccountDatabase();
-    private final FriendshipDatabase friendshipDataBase = new FriendshipDatabase();
-    
-    public ArrayList<String> suggestFriends(String userID) {
-        ArrayList<User> users = userDataBase.getAllRecords();
+class FriendSuggester implements SuggestionsGeneratorImplementor{
+    private final AccountDatabase accountDatabase;
+    private final FriendshipDatabase friendshipDataBase;
+
+    public FriendSuggester() {
+        accountDatabase = new AccountDatabase();
+        friendshipDataBase = new FriendshipDatabase();
+    }    
+
+    @Override
+    public ArrayList<String> suggest(String userID) {
+        ArrayList<User> users = accountDatabase.getAllRecords();
         ArrayList<String> connectedUserIDs = friendshipDataBase.getRecordsIDsOfUser(userID);
         ArrayList<String> suggestions = new ArrayList<>();
         
@@ -25,3 +31,4 @@ class FriendSuggester {
         return suggestions;
     }
 }
+    

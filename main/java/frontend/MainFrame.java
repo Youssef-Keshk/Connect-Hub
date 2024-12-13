@@ -25,7 +25,9 @@ public class MainFrame extends javax.swing.JFrame {
     private final LoginPanel loginPanel;
     private final ProfilePanel profilePanel;
     private final NewsFeedPanel newsFeedPanel;
-    private final FriendsPanel tmpPanel;
+    private final FriendsPanel friendsPanel;
+//    private final SearchPanel searchPanel;
+//    private final NoficationsPanel noficationsPanel;
     
     public MainFrame() {
         
@@ -43,7 +45,9 @@ public class MainFrame extends javax.swing.JFrame {
         loginPanel = new LoginPanel(this);
         profilePanel = new ProfilePanel(this);
         newsFeedPanel = new NewsFeedPanel(this);
-        tmpPanel = new FriendsPanel(this);
+        friendsPanel = new FriendsPanel(this);
+//        searchPanel = new SearchPanel(this);
+//        noficationsPanel = new NoficationsPanel(this);
         
         setAllPanels();
         add(mainPanel);
@@ -72,7 +76,8 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(loginPanel, "LoginPanel");
         mainPanel.add(profilePanel, "ProfilePanel");
         mainPanel.add(newsFeedPanel, "NewsFeedPanel");
-        mainPanel.add(tmpPanel, "FriendsPanel");
+//        mainPanel.add(searchPanel, "SearchPanel");
+//        mainPanel.add(noficationsPanel, "NoficationsPanel");
        
     }
     
@@ -104,7 +109,27 @@ public class MainFrame extends javax.swing.JFrame {
     public void switchToFriendsPage() {
         refreshManagers();
         cardLayout.show(mainPanel, "FriendsPanel");   
-        tmpPanel.startFriends();
+        friendsPanel.startFriends();
+    }
+    
+    public void switchToSearchPage() {
+        refreshManagers();
+//        cardLayout.show(mainPanel, "SearchPanel");   
+//        searchPanel.startSearch();
+    }
+    
+    public void switchToNoficationsPage() {
+        refreshManagers();
+//        cardLayout.show(mainPanel, "NoficationsPanel");   
+//        noficationsPanel.startNofications();
+    }
+    
+    public void switchToRandomUserProfile(String userID) {
+        
+    }
+    
+    public void switchToRandomGroupProfile(String groupID) {
+        
     }
     
     public void setUser(User user) {
@@ -129,8 +154,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void updateUser() {
         user = accountManager.getRecord(user.getUserId());
-    }
-    
+    }    
     
     public void logout() {
         if(user != null)

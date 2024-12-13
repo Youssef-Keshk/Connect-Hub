@@ -2,4 +2,8 @@
   "senderId" : "U3",
   "receiverId" : "U1",
   "status" : "ACCEPTED"
+}, {
+  "senderId" : "U2",
+  "receiverId" : "U1",
+  "status" : "ACCEPTED"
 } ]

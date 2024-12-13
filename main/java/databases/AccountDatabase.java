@@ -1,6 +1,7 @@
 package databases;
 
 import entities.User;        
+import java.util.ArrayList;
         
 public class AccountDatabase extends DatabaseHandler<User>{
     

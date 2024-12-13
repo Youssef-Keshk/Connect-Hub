@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Post.class, name = "POST"),
-    @JsonSubTypes.Type(value = Story.class, name = "STORY")
+    @JsonSubTypes.Type(value = Story.class, name = "STORY"),
+    @JsonSubTypes.Type(value = GroupPost.class, name = "GROUP_POST")
 })
 public abstract class Content {
     @JsonProperty

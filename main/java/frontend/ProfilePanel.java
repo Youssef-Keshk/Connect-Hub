@@ -136,6 +136,7 @@ public class ProfilePanel extends javax.swing.JPanel {
         storiesButton = new javax.swing.JButton();
         friendsButton = new javax.swing.JButton();
         homeButton = new javax.swing.JButton();
+        groupsButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         profileContainerPanel = new javax.swing.JPanel();
         profileDataPanel = new javax.swing.JPanel();
@@ -202,6 +203,19 @@ public class ProfilePanel extends javax.swing.JPanel {
             }
         });
 
+        groupsButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        groupsButton.setForeground(new java.awt.Color(102, 0, 255));
+        groupsButton.setText("Groups");
+        groupsButton.setBorder(null);
+        groupsButton.setBorderPainted(false);
+        groupsButton.setContentAreaFilled(false);
+        groupsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        groupsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                groupsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,8 +228,9 @@ public class ProfilePanel extends javax.swing.JPanel {
                             .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(friendsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                             .addComponent(storiesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(homeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addComponent(homeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(groupsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -223,19 +238,19 @@ public class ProfilePanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(storiesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(friendsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(groupsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        profileContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         profileContainerPanel.setMaximumSize(new java.awt.Dimension(501, 32767));
 
-        profileDataPanel.setBackground(new java.awt.Color(255, 255, 255));
         profileDataPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 0, 102), 1, true));
         profileDataPanel.setMaximumSize(new java.awt.Dimension(493, 134));
 
@@ -322,7 +337,7 @@ public class ProfilePanel extends javax.swing.JPanel {
                 .addGap(4, 4, 4)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,11 +363,16 @@ public class ProfilePanel extends javax.swing.JPanel {
         parent.switchToNewsFeedPage();
     }//GEN-LAST:event_homeButtonActionPerformed
 
+    private void groupsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_groupsButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bioTextField;
     private javax.swing.JLabel coverPicLabel;
     private javax.swing.JButton friendsButton;
+    private javax.swing.JButton groupsButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

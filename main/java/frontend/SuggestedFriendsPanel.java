@@ -14,7 +14,7 @@ public class SuggestedFriendsPanel extends javax.swing.JPanel {
     ArrayList<User> suggestedsFriends;
     MainFrame parent;
  
-    public SuggestedFriendsPanel(ArrayList<User> suggestedsFriends,MainFrame parent) {
+    public SuggestedFriendsPanel(ArrayList<User> suggestedsFriends, MainFrame parent) {
         this.suggestedsFriends = suggestedsFriends;
         this.parent = parent;
         initComponents();
@@ -63,7 +63,7 @@ public class SuggestedFriendsPanel extends javax.swing.JPanel {
 
         titleLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Suggestions");
+        titleLabel.setText("Friend Suggestions");
         titleLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         titleLabel.setMaximumSize(new java.awt.Dimension(240, 21));
         titleLabel.setMinimumSize(new java.awt.Dimension(220, 21));

@@ -2,6 +2,7 @@ package managers;
 
 import databases.AccountDatabase;
 import entities.User;
+import java.util.ArrayList;
 
 
 public class AccountManager implements Manager{
@@ -99,5 +100,11 @@ public class AccountManager implements Manager{
        }catch(Exception e) {
            return "";
        }
+   }
+   
+   // Fetches users with matching usernames
+   public ArrayList<User> searchUsers(String searchKey) {
+       SearcherAbstractionImpl<User> searcher = new SearcherAbstractionImpl<>(new UserSearcher());
+       return searcher.search(searchKey);
    }
 }

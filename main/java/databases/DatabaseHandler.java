@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class DatabaseHandler<T> {
     final JsonHandler<T> database;
-    ArrayList<T> records;
+    protected ArrayList<T> records;
     private final Class<T> type;
 
     public DatabaseHandler(String filePath, Class<T> type) {

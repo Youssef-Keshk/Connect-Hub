@@ -59,9 +59,10 @@ public class AllSearchedGroups extends javax.swing.JPanel {
         titleLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Best Matching Groups");
-        titleLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        titleLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         add(titleLabel, java.awt.BorderLayout.PAGE_START);
 
+        groupsContainerPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         groupsContainerPanel.setLayout(new javax.swing.BoxLayout(groupsContainerPanel, javax.swing.BoxLayout.LINE_AXIS));
         add(groupsContainerPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents

@@ -37,7 +37,7 @@ public class ItemSearchUserPanel extends javax.swing.JPanel {
         try {
             ImageIcon icon = new ImageIcon(profilePhotoPath);
             if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
-                Image image = icon.getImage().getScaledInstance(40, 25, Image.SCALE_SMOOTH);
+                Image image = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
                 profilePicLabel.setIcon(new ImageIcon(image));
             } else {
                 profilePicLabel.setText("No Image");
@@ -49,7 +49,7 @@ public class ItemSearchUserPanel extends javax.swing.JPanel {
     }
     
     public void viewProfile() {
-        parent.switchToRandomUserProfile(userID);
+        parent.switchToRandomUserProfile(parent.getAccountManager().getRecord(userID));
     }
 
     
@@ -84,13 +84,13 @@ public class ItemSearchUserPanel extends javax.swing.JPanel {
         add(usernameLabel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void profilePicLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePicLabelMouseClicked
-        viewProfile();
-    }//GEN-LAST:event_profilePicLabelMouseClicked
-
     private void usernameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseClicked
         viewProfile();
     }//GEN-LAST:event_usernameLabelMouseClicked
+
+    private void profilePicLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilePicLabelMouseClicked
+        viewProfile();
+    }//GEN-LAST:event_profilePicLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

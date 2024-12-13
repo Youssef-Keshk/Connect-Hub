@@ -1,5 +1,4 @@
 package frontend;
-import entities.User;
 import managers.FriendshipManager;
 import javax.swing.JDialog;
 

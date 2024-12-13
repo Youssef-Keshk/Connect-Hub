@@ -1,9 +1,11 @@
 [ {
   "senderId" : "U3",
   "receiverId" : "U1",
-  "status" : "ACCEPTED"
+  "status" : "ACCEPTED",
+  "type" : "USERS"
 }, {
   "senderId" : "U2",
-  "receiverId" : "U1",
-  "status" : "ACCEPTED"
+  "receiverId" : "U3",
+  "status" : "ACCEPTED",
+  "type" : "USERS"
 } ]

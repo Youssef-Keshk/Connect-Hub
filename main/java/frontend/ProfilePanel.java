@@ -232,10 +232,8 @@ public class ProfilePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        profileContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         profileContainerPanel.setMaximumSize(new java.awt.Dimension(501, 32767));
 
-        profileDataPanel.setBackground(new java.awt.Color(255, 255, 255));
         profileDataPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 0, 102), 1, true));
         profileDataPanel.setMaximumSize(new java.awt.Dimension(493, 134));
 

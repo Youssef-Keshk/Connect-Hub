@@ -9,6 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import managers.FriendshipManager;
+import managers.NotificationManager;
+
 
 public class ItemFriendSuggestionPanel extends javax.swing.JPanel {
 
@@ -17,12 +19,14 @@ public class ItemFriendSuggestionPanel extends javax.swing.JPanel {
     private final String path;
     private final MainFrame parent;
     private final FriendshipManager friendshipManager;
+    private final NotificationManager notificationManager;
 
     public ItemFriendSuggestionPanel(User user, MainFrame parent) {
         this.user = user;
         this.username = user.getUsername();
         this.parent = parent;
         this.friendshipManager = parent.getFriendshipManager();
+        this.notificationManager = parent.getNotificationManager();
         this.path = user.getProfile().getProfilePhotoPath();
 
 //        setPreferredSize(new Dimension(220, 80));
@@ -102,6 +106,8 @@ public class ItemFriendSuggestionPanel extends javax.swing.JPanel {
     private void addFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFriendButtonActionPerformed
         JOptionPane.showMessageDialog(null, "Friend request sent to " + username, "Message", JOptionPane.INFORMATION_MESSAGE);
         friendshipManager.sendRequest(parent.getUser().getUserId(), user.getUserId());
+        notificationManager.createRequestNotification(parent.getUser(), user);
+                
         parent.switchToNewsFeedPage();
     }//GEN-LAST:event_addFriendButtonActionPerformed
 

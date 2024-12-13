@@ -16,4 +16,6 @@ public interface FilePaths {
     final String GROUPS_FILEPATH = "src/main/java/resources/groups.json";
     final String GROUPS_COUNT_FILEPATH = "src/main/java/resources/groupsCount.txt";
     final String GROUPS_POSTS_FILEPATH = "src/main/java/resources/groupsPosts.json";
+    final String NOTIFICATIONS_FILEPATH = "src/main/java/resources/notifications.json";
+
 }

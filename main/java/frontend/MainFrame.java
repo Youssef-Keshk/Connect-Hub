@@ -18,6 +18,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final AccountManager accountManager;
     private final FriendshipManager friendshipManager;
     private final ContentManager contentManager;
+    private final NotificationManager notificationManager;
     private final GroupManager groupManager;
     private final GroupContentManager groupContentManager;
     
@@ -33,7 +34,8 @@ public class MainFrame extends javax.swing.JFrame {
     private final SearchPanel searchPanel;
     private final RandomGroupProfilePanel groupProfilePanel;
     private final RandomUserProfilePanel userProfilePanel;
-//    private final NoficationsPanel noficationsPanel;
+    private final NotificationsPanel notificationsPanel;
+
     
     public MainFrame() {
         
@@ -43,7 +45,8 @@ public class MainFrame extends javax.swing.JFrame {
         contentManager = ContentManager.getInstance();
         groupManager = GroupManager.getInstance();
         groupContentManager = GroupContentManager.getInstance();
-        
+        notificationManager = NotificationManager.getInstance();
+      
         initComponents();
         
         cardLayout = new CardLayout();
@@ -57,8 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
         searchPanel = new SearchPanel(this);
         groupProfilePanel = new RandomGroupProfilePanel(this);
         userProfilePanel = new RandomUserProfilePanel(this);
-        
-//        noficationsPanel = new NoficationsPanel(this);
+        notificationsPanel = new NotificationsPanel(this);
         
         setAllPanels();
         add(mainPanel);
@@ -84,6 +86,8 @@ public class MainFrame extends javax.swing.JFrame {
         friendshipManager.refresh();
         groupManager.refresh();
         groupContentManager.refresh();
+        notificationManager.refresh();
+
     }
     
     private void setAllPanels() {
@@ -95,8 +99,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(searchPanel, "SearchPanel");
         mainPanel.add(groupProfilePanel, "RandomGroupProfilePanel");
         mainPanel.add(userProfilePanel, "RandomUserProfilePanel");
-        
-//        mainPanel.add(noficationsPanel, "NoficationsPanel");
+        mainPanel.add(notificationsPanel, "NotificationsPanel");
        
     }
     
@@ -143,12 +146,6 @@ public class MainFrame extends javax.swing.JFrame {
        searchPanel.startSearch();
     }
     
-    public void switchToNoficationsPage() {
-//        resizeFrame(noficationsPanel);
-        refreshManagers();
-//        cardLayout.show(mainPanel, "NoficationsPanel");   
-//        noficationsPanel.startNofications();
-    }
     
     public void switchToRandomUserProfile(User user) {
         refreshManagers();
@@ -168,6 +165,13 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
+    public void switchToNotificationsPage() {
+        refreshManagers();
+        cardLayout.show(mainPanel, "NotificationsPanel");   
+        resizeFrame(new Dimension(1000, 600));
+        notificationsPanel.startNotifications();
+    }
+    
     public void setUser(User user) {
         this.user = user;
     }
@@ -182,6 +186,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     public FriendshipManager getFriendshipManager() {
         return friendshipManager;
+    }
+    
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
     }
 
     public ContentManager getContentManager() {

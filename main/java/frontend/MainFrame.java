@@ -16,6 +16,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final AccountManager accountManager;
     private final FriendshipManager friendshipManager;
     private final ContentManager contentManager;
+    private final NotificationManager notificationManager;
     
     private final CardLayout cardLayout;
     private final JPanel mainPanel;
@@ -26,6 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final ProfilePanel profilePanel;
     private final NewsFeedPanel newsFeedPanel;
     private final FriendsPanel tmpPanel;
+    private final NotificationsPanel notificationsPanel;
     
     public MainFrame() {
         
@@ -33,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
         accountManager =  AccountManager.getInstance();
         friendshipManager = FriendshipManager.getInstance();
         contentManager = ContentManager.getInstance();
-        
+        notificationManager = NotificationManager.getInstance();
         initComponents();
         
         cardLayout = new CardLayout();
@@ -44,6 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
         profilePanel = new ProfilePanel(this);
         newsFeedPanel = new NewsFeedPanel(this);
         tmpPanel = new FriendsPanel(this);
+        notificationsPanel = new NotificationsPanel(this);
         
         setAllPanels();
         add(mainPanel);
@@ -65,6 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
         accountManager.refresh();
         contentManager.refresh();
         friendshipManager.refresh();
+        notificationManager.refresh();
     }
     
     private void setAllPanels() {
@@ -73,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(profilePanel, "ProfilePanel");
         mainPanel.add(newsFeedPanel, "NewsFeedPanel");
         mainPanel.add(tmpPanel, "FriendsPanel");
+        mainPanel.add(notificationsPanel, "NotificationsPanel");
        
     }
     
@@ -107,6 +112,12 @@ public class MainFrame extends javax.swing.JFrame {
         tmpPanel.startFriends();
     }
     
+    public void switchToNotificationsPage() {
+        refreshManagers();
+        cardLayout.show(mainPanel, "NotificationsPanel");   
+        notificationsPanel.startNotifications();
+    }
+    
     public void setUser(User user) {
         this.user = user;
     }
@@ -121,6 +132,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     public FriendshipManager getFriendshipManager() {
         return friendshipManager;
+    }
+    
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
     }
 
     public ContentManager getContentManager() {

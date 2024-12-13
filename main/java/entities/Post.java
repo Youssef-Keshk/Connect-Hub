@@ -13,6 +13,5 @@ public class Post extends Content{
     public Post(String authorId, String text, String imagePath) {
         super("P" + new PostCount().incrementAndGetCount(), authorId, text, imagePath);
     }
-    
-    
+        
 }

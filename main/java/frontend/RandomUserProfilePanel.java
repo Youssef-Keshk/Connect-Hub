@@ -1,7 +1,8 @@
 package frontend;
 
-import managers.*;
-import entities.*;
+import entities.Post;
+import entities.Story;
+import entities.User;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Image;
@@ -11,23 +12,30 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import managers.*;
 
-public class ProfilePanel extends javax.swing.JPanel {
 
+public class RandomUserProfilePanel extends javax.swing.JPanel {
     private final MainFrame parent;
-    private ContentManager contentManager;
-    private AccountManager accountManager;
-    private FriendshipManager friendshipManager;
-
-    public ProfilePanel(MainFrame parent) {
+    private final User mainUser;
+    private final User searchedUser;
+    private final boolean isFriend;
+    private final ContentManager contentManager;
+    private final AccountManager accountManager;
+    private final FriendshipManager friendshipManager;
+    
+    public RandomUserProfilePanel(MainFrame parent, User searchedUser, boolean isFriend) {
         this.parent = parent;
+        this.isFriend = isFriend;
+        this.mainUser = parent.getUser();
+        this.searchedUser = searchedUser;
         contentManager = parent.getContentManager();
         accountManager = parent.getAccountManager();
         friendshipManager = parent.getFriendshipManager();
         initComponents();
         postsPanel.setLayout(new javax.swing.BoxLayout(postsPanel, javax.swing.BoxLayout.Y_AXIS));
     }
-
+    
     public void startProfile() {
         resetLabels();
         viewProfileData();
@@ -43,48 +51,18 @@ public class ProfilePanel extends javax.swing.JPanel {
         revalidate();
         repaint();
     }
-
-    public void viewPosts() {
-        ArrayList<Post> posts = contentManager.getPosts(parent.getUser().getUserId());
-        if (posts.isEmpty()) {
-            JLabel label = new JLabel("No posts yet");
-
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setVerticalAlignment(SwingConstants.CENTER);
-            label.setFont(new Font("Arial", Font.BOLD, 24));
-            postsPanel.add(label, BorderLayout.CENTER);
-        }
-        for (Post post : posts) {
-            ItemContentPanel icp = new ItemContentPanel(parent, post);
-            postsPanel.add(icp);
-        }
-    }
-
+    
+    
+    
     public void viewProfileData() {
-        String profilePhoto = accountManager.getRecord(parent.getUser().getUserId()).getProfile().getProfilePhotoPath();
-        String coverPhoto = accountManager.getRecord(parent.getUser().getUserId()).getProfile().getCoverPhotoPath();
+        String profilePhoto = searchedUser.getProfile().getProfilePhotoPath();
+        String coverPhoto = searchedUser.getProfile().getCoverPhotoPath();
         viewProfilePic(profilePhoto);
         viewCoverPic(coverPhoto);
-        usernameLabel.setText(accountManager.getRecord(parent.getUser().getUserId()).getUsername());
-        bioTextField.setText(accountManager.getRecord(parent.getUser().getUserId()).getProfile().getBio());
+        usernameLabel.setText(accountManager.getRecord(searchedUser.getUserId()).getUsername());
+        bioTextField.setText(accountManager.getRecord(searchedUser.getUserId()).getProfile().getBio());
     }
-
-    public void viewStories() {
-        ArrayList<Story> stories = contentManager.getStories(parent.getUser().getUserId());
-        if (stories.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "You have no stories.", "Message", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        ArrayList<ItemContentPanel> icps = new ArrayList<>();
-        for (Story story : stories) {
-            icps.add(new ItemContentPanel(parent, story));
-        }
-        StoryCarouselPanel carouselPanel = new StoryCarouselPanel(icps);
-
-        StoriesDialoge dialog = new StoriesDialoge(parent, "Stories", true);
-        dialog.viewStoryCarousel(carouselPanel);
-    }
-
+    
     public void viewProfilePic(String profilePhoto) {
         try {
             ImageIcon icon = new ImageIcon(profilePhoto);
@@ -112,31 +90,46 @@ public class ProfilePanel extends javax.swing.JPanel {
             coverPicLabel.setText("No Image");
         }
     }
+    
+    public void viewPosts() {
+        ArrayList<Post> posts = contentManager.getPosts(searchedUser.getUserId());
+        if (posts.isEmpty()) {
+            JLabel label = new JLabel("No posts yet");
 
-    private void resetProfilePanel() {
-        profileContainerPanel.removeAll(); // Clear all dynamically added components
-        profileContainerPanel.setLayout(new BorderLayout()); // Reset layout if needed
-
-        // Re-add the original components
-        profileContainerPanel.add(profileDataPanel, BorderLayout.NORTH);
-        profileContainerPanel.add(postsPanel, BorderLayout.CENTER);
-
-        // Refresh the UI
-        profileContainerPanel.revalidate();
-        profileContainerPanel.repaint();
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setVerticalAlignment(SwingConstants.CENTER);
+            label.setFont(new Font("Arial", Font.BOLD, 24));
+            postsPanel.add(label, BorderLayout.CENTER);
+        }
+        for (Post post : posts) {
+            ItemContentPanel icp = new ItemContentPanel(parent, post);
+            postsPanel.add(icp);
+        }
     }
     
+    public void viewStories() {
+        ArrayList<Story> stories = contentManager.getStories(searchedUser.getUserId());
+        if (stories.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "User has no stories.", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ArrayList<ItemContentPanel> icps = new ArrayList<>();
+        for (Story story : stories) {
+            icps.add(new ItemContentPanel(parent, story));
+        }
+        StoryCarouselPanel carouselPanel = new StoryCarouselPanel(icps);
 
+        StoriesDialoge dialog = new StoriesDialoge(parent, "Stories", true);
+        dialog.viewStoryCarousel(carouselPanel);
+    }
+    
+    
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        updateButton = new javax.swing.JButton();
-        storiesButton = new javax.swing.JButton();
-        friendsButton = new javax.swing.JButton();
-        homeButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         profileContainerPanel = new javax.swing.JPanel();
         profileDataPanel = new javax.swing.JPanel();
         coverPicLabel = new javax.swing.JLabel();
@@ -144,96 +137,15 @@ public class ProfilePanel extends javax.swing.JPanel {
         usernameLabel = new javax.swing.JLabel();
         bioTextField = new javax.swing.JTextField();
         postsPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        blockButton = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
+        storiesButton = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(200, 200, 200));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 255), 2, true));
-
-        updateButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        updateButton.setForeground(new java.awt.Color(102, 0, 255));
-        updateButton.setText("Update");
-        updateButton.setToolTipText("");
-        updateButton.setBorder(null);
-        updateButton.setBorderPainted(false);
-        updateButton.setContentAreaFilled(false);
-        updateButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        updateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButtonActionPerformed(evt);
-            }
-        });
-
-        storiesButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        storiesButton.setForeground(new java.awt.Color(102, 0, 255));
-        storiesButton.setText("Stories");
-        storiesButton.setBorder(null);
-        storiesButton.setBorderPainted(false);
-        storiesButton.setContentAreaFilled(false);
-        storiesButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        storiesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                storiesButtonActionPerformed(evt);
-            }
-        });
-
-        friendsButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        friendsButton.setForeground(new java.awt.Color(102, 0, 255));
-        friendsButton.setText("Friends");
-        friendsButton.setBorder(null);
-        friendsButton.setBorderPainted(false);
-        friendsButton.setContentAreaFilled(false);
-        friendsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        friendsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                friendsButtonActionPerformed(evt);
-            }
-        });
-
-        homeButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        homeButton.setForeground(new java.awt.Color(102, 0, 255));
-        homeButton.setText("Home");
-        homeButton.setToolTipText("");
-        homeButton.setBorder(null);
-        homeButton.setBorderPainted(false);
-        homeButton.setContentAreaFilled(false);
-        homeButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        homeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(friendsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(storiesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(homeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(storiesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(friendsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
+        profileContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         profileContainerPanel.setMaximumSize(new java.awt.Dimension(501, 32767));
 
+        profileDataPanel.setBackground(new java.awt.Color(255, 255, 255));
         profileDataPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 0, 102), 1, true));
         profileDataPanel.setMaximumSize(new java.awt.Dimension(493, 134));
 
@@ -306,60 +218,122 @@ public class ProfilePanel extends javax.swing.JPanel {
             .addGroup(profileContainerPanelLayout.createSequentialGroup()
                 .addComponent(profileDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(postsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(postsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jScrollPane1.setViewportView(profileContainerPanel);
+        jPanel1.setBackground(new java.awt.Color(200, 200, 200));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 0, 255), 2, true));
+
+        blockButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        blockButton.setForeground(new java.awt.Color(102, 0, 0));
+        blockButton.setText("Block");
+        blockButton.setBorder(null);
+        blockButton.setBorderPainted(false);
+        blockButton.setContentAreaFilled(false);
+        blockButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        blockButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blockButtonActionPerformed(evt);
+            }
+        });
+
+        homeButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        homeButton.setForeground(new java.awt.Color(102, 0, 255));
+        homeButton.setText("Home");
+        homeButton.setToolTipText("");
+        homeButton.setBorder(null);
+        homeButton.setBorderPainted(false);
+        homeButton.setContentAreaFilled(false);
+        homeButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeButtonActionPerformed(evt);
+            }
+        });
+
+        storiesButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        storiesButton.setForeground(new java.awt.Color(102, 0, 255));
+        storiesButton.setText("Stories");
+        storiesButton.setBorder(null);
+        storiesButton.setBorderPainted(false);
+        storiesButton.setContentAreaFilled(false);
+        storiesButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        storiesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storiesButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                    .addComponent(storiesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(blockButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(storiesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(blockButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(profileContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(profileContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        UpdateProfileDataDialoge dialog = new UpdateProfileDataDialoge(parent, "Update", true);
-        viewProfileData();
-    }//GEN-LAST:event_updateButtonActionPerformed
-
-    private void storiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storiesButtonActionPerformed
-        viewStories();
-    }//GEN-LAST:event_storiesButtonActionPerformed
-
-    private void friendsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsButtonActionPerformed
-        parent.switchToFriendsPage();
-    }//GEN-LAST:event_friendsButtonActionPerformed
+    private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed
+        
+    }//GEN-LAST:event_blockButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         parent.switchToNewsFeedPage();
     }//GEN-LAST:event_homeButtonActionPerformed
 
+    private void storiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storiesButtonActionPerformed
+        viewStories();
+    }//GEN-LAST:event_storiesButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bioTextField;
+    private javax.swing.JButton blockButton;
     private javax.swing.JLabel coverPicLabel;
-    private javax.swing.JButton friendsButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel postsPanel;
     private javax.swing.JPanel profileContainerPanel;
     private javax.swing.JPanel profileDataPanel;
     private javax.swing.JLabel profilePicLabel;
     private javax.swing.JButton storiesButton;
-    private javax.swing.JButton updateButton;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

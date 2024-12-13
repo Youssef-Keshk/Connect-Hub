@@ -1,12 +1,14 @@
 package entities;
 
 import enums.FriendshipStatus;
+import enums.FriendshipType;
 
 // Builder creational pattern for Friendship
 public class FriendshipBuilder {
     public String senderId;
     public String receiverId;
     public FriendshipStatus status;
+    public FriendshipType type;
     
     public FriendshipBuilder senderId(String senderId) {
             this.senderId = senderId;
@@ -20,6 +22,11 @@ public class FriendshipBuilder {
 
     public FriendshipBuilder status(FriendshipStatus status) {
         this.status = status;
+        return this;
+    }
+    
+    public FriendshipBuilder type(FriendshipType type) {
+        this.type = type;
         return this;
     }
 

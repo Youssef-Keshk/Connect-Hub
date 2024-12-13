@@ -1,5 +1,6 @@
 package frontend;
 
+import entities.Group;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.MediaTracker;
@@ -16,7 +17,7 @@ public class ItemSearchGroupPanel extends javax.swing.JPanel {
         this.parent = parent;
         this.groupID = group.getGroupId();
         this.groupName = group.getGroupName();
-        this.groupPhotoPath = group.getProfile().getProfilePhotoPath();
+        this.groupPhotoPath = group.getPhotoPath();
         
         initComponents();
         

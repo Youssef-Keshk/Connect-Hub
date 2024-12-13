@@ -1,15 +1,20 @@
 package frontend;
 
+import java.awt.Color;
 import managers.AccountManager;
+import managers.GroupManager;
 
 
 public class SearchPanel extends javax.swing.JPanel {
     private final MainFrame parent;
     private final AccountManager accountManager;
+    private final GroupManager groupManager;
+    private String text;
     
     public SearchPanel(MainFrame parent) {
         this.parent = parent;
         accountManager = parent.getAccountManager();
+        groupManager = parent.getGroupManager();
         initComponents();
     }
     
@@ -23,23 +28,26 @@ public class SearchPanel extends javax.swing.JPanel {
         repaint();
     }
     
-    public void searchForUsers(String username) {
-        ArrayList<User> users = accountManager.searchForUsers(username);
-        viewUsers(users);
-    }
-    
-    public void searchForGroups(String groupName) {
-        ArrayList<Group> groups = groupManager.searchForGroups(groupName);
-        viewGroups(groups);
-    }
-    
-    public void viewUsers(ArrayList<User> users) {
+    public void search(String text) {
         
     }
-    
-    public void viewGroups(ArrayList<Group> groups) {
-        
-    }
+//    public void searchForUsers(String username) {
+//        ArrayList<User> users = accountManager.searchForUsers(username);
+//        viewUsers(users);
+//    }
+//    
+//    public void searchForGroups(String groupName) {
+//        ArrayList<Group> groups = groupManager.searchForGroups(groupName);
+//        viewGroups(groups);
+//    }
+//    
+//    public void viewUsers(ArrayList<User> users) {
+//        
+//    }
+//    
+//    public void viewGroups(ArrayList<Group> groups) {
+//        
+//    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -177,7 +185,7 @@ public class SearchPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        
+        search(searchTextField.getText());
     }//GEN-LAST:event_searchButtonActionPerformed
 
 

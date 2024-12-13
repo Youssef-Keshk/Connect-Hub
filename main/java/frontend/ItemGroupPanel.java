@@ -16,7 +16,7 @@ public class ItemGroupPanel extends javax.swing.JPanel {
         this.parent = parent;
         this.userID = parent.getUser().getUserId();
         this.groupName = group.getGroupName();
-        this.groupPhotoPath = group.getgroupPhotoPath();
+        this.groupPhotoPath = group.getPhotoPath();
         initComponents();
 //        setPreferredSize(new Dimension(220, 60));
 //        setMinimumSize(new Dimension(150, 60));
@@ -35,7 +35,7 @@ public class ItemGroupPanel extends javax.swing.JPanel {
         try {
             ImageIcon icon = new ImageIcon(groupPhotoPath);
             if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
-                Image image = icon.getImage().getScaledInstance(40, 25, Image.SCALE_SMOOTH);
+                Image image = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
                 groupPhotoLabel.setIcon(new ImageIcon(image));
             } else {
                 groupPhotoLabel.setText("No Image");

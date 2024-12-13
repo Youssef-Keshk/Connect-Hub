@@ -37,12 +37,12 @@ public class AllGroupsPanel extends javax.swing.JPanel {
             groupListContainerPanel.add(label, BorderLayout.CENTER);
         }
         for(Group group : groups)
-            groupListContainerPanel.add(getItemFriendsPanel(group));
+            groupListContainerPanel.add(getItemGroupPanel(group));
     }
     
    
     public ItemGroupPanel getItemGroupPanel(Group group) {
-        return new ItemGroupPanel(group, parent);
+        return new ItemGroupPanel(parent, group);
     }
 
 

@@ -93,7 +93,7 @@ public class FriendsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        backButton = new javax.swing.JButton();
+        ProfileButton = new javax.swing.JButton();
         containerPanel = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -103,17 +103,17 @@ public class FriendsPanel extends javax.swing.JPanel {
         jPanel1.setMaximumSize(new java.awt.Dimension(89, 32767));
         jPanel1.setPreferredSize(new java.awt.Dimension(89, 400));
 
-        backButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        backButton.setForeground(new java.awt.Color(102, 0, 255));
-        backButton.setText("Back");
-        backButton.setToolTipText("");
-        backButton.setBorder(null);
-        backButton.setBorderPainted(false);
-        backButton.setContentAreaFilled(false);
-        backButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        backButton.addActionListener(new java.awt.event.ActionListener() {
+        ProfileButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        ProfileButton.setForeground(new java.awt.Color(102, 0, 255));
+        ProfileButton.setText("Profile");
+        ProfileButton.setToolTipText("");
+        ProfileButton.setBorder(null);
+        ProfileButton.setBorderPainted(false);
+        ProfileButton.setContentAreaFilled(false);
+        ProfileButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
+                ProfileButtonActionPerformed(evt);
             }
         });
 
@@ -123,14 +123,14 @@ public class FriendsPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(356, Short.MAX_VALUE)
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -140,13 +140,13 @@ public class FriendsPanel extends javax.swing.JPanel {
         add(containerPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+    private void ProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileButtonActionPerformed
         parent.switchToProfilePage();
-    }//GEN-LAST:event_backButtonActionPerformed
+    }//GEN-LAST:event_ProfileButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
+    private javax.swing.JButton ProfileButton;
     private javax.swing.JPanel containerPanel;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

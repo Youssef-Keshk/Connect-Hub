@@ -48,15 +48,22 @@ public class ContentDatabase extends DatabaseHandler<Content>{
     }
     
     public void filterContent() {
-    records = records.stream()
-        .filter(content -> {
-            if (content instanceof Story) {
-                Duration duration = Duration.between(content.getPublishDate(), LocalDateTime.now());
-                return duration.toHours() < 24; //Keep stories that are less than 24 hours old
-            }
-            return true;
-        })
-        .collect(Collectors.toCollection(ArrayList::new));
-}
+        records = records.stream()
+            .filter(content -> {
+                if (content instanceof Story) {
+                    Duration duration = Duration.between(content.getPublishDate(), LocalDateTime.now());
+                    return duration.toHours() < 24; //Keep stories that are less than 24 hours old
+                }
+                return true;
+            })
+            .collect(Collectors.toCollection(ArrayList::new));
+        }
+    
+    public Content getContent(String contentId) {
+        for(Content record : records) 
+            if(record.getContentId().equals(contentId))
+                return record;
+        return null;
+    }
 
 }

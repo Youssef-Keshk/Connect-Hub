@@ -96,11 +96,11 @@ creational, structural and behavioral design patterns.
 1. **Fork the repository**.
 2. **Create a branch**: 
     ```bash
-    git checkout -b <branch-name>.
+    git checkout -b <branch-name>
 3. **Commit changes**:
     ```bash
     git commit -m "Your message"
 4. **Push to branch**: 
     ```bash
-    git push origin <branch-name>>
+    git push origin <branch-name>
 5. **Submit a pull request**.

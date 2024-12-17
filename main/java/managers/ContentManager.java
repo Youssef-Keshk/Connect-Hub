@@ -2,9 +2,11 @@ package managers;
 
 import entities.Story;
 import databases.ContentDatabase;
+import entities.Comment;
 import entities.Content;
 import entities.ContentFactory;
 import entities.ContentFactoryData;
+import entities.Like;
 import entities.Post;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,8 +46,60 @@ public class ContentManager implements Manager{
         return contentDatabase.insertRecord(story);
     }
     
-    public ArrayList<Content> get() {
-        return contentDatabase.getAllRecords();
+    // Method to add a like to a content
+    public boolean addLike(String contentId, String userId) {
+        Content content = contentDatabase.getContent(contentId);
+        try {
+            Like like = new Like(userId);
+            content.addLike(like);
+            save();
+        }catch(NullPointerException e) {
+            System.out.println("Error finding content " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+    
+    // Method to remove a like of a content
+    public boolean removeLike(String contentId, String userId) {
+        Content content = contentDatabase.getContent(contentId);
+        try {
+            Like like = content.getLike(userId);
+            content.removeLike(like);
+            save();
+        }catch(NullPointerException e) {
+            System.out.println("Error finding content or like " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+    
+    // Method to add comment to a content
+    public boolean addComment(String contentId, String userId, String text) {
+        Content content = contentDatabase.getContent(contentId);
+        try {
+            Comment comment = new Comment(userId, text);
+            content.addComment(comment);
+            save();
+        }catch(NullPointerException e) {
+            System.out.println("Error finding content " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    // Method to add comment to a content
+    public boolean removeComment(String contentId, String userId, String text) {
+        Content content = contentDatabase.getContent(contentId);
+        try {
+            Comment comment = content.getComment(userId, text);
+            content.deleteComment(comment);
+            save();
+        }catch(NullPointerException e) {
+            System.out.println("Error finding content or comment" + e.getMessage());
+            return false;
+        }
+        return true;
     }
     
     public void createContent(ContentType type, String userId, String text, String path) {

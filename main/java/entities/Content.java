@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
@@ -21,6 +22,10 @@ public abstract class Content {
     protected String text;
     @JsonProperty
     protected String imagePath;
+    @JsonProperty
+    protected ArrayList<Like> likes;
+    @JsonProperty
+    protected ArrayList<Comment> comments;
     
     @JsonProperty
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -35,15 +40,13 @@ public abstract class Content {
         this.text = text;
         this.imagePath = imagePath;
         this.publishDate = currentTime;
+        this.likes = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
     
 
     public String getContentId() {
         return contentId;
-    }
-
-    public void setContentId(String contentId) {
-        this.contentId = contentId;
     }
 
     public String getAuthorId() {
@@ -74,14 +77,49 @@ public abstract class Content {
         return publishDate;
     }
 
-    public void setPublishDate(LocalDateTime publishDate) {
-        this.publishDate = publishDate;
+    public ArrayList<Like> getLikes() {
+        return likes;
+    }
+    
+    public Like getLike(String userId) {
+        for(Like like : likes) 
+            if(like.getUserId().equals(userId))
+                return like;
+        return null;
+    }
+    
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+    
+    public Comment getComment(String userId, String text) {
+        for(Comment comment : comments)
+            if(comment.getUserId().equals(userId) && comment.getText().equals(text))
+                return comment;
+        return null;
+    }
+    
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+    
+    public void addLike(Like like) {
+        likes.add(like);
+    }
+    
+    public void deleteComment(Comment comment) {
+        comments.remove(comment);
+    }
+    
+    public void removeLike(Like like) {
+        likes.remove(like);
     }
 
     @Override
     public String toString() {
-        return "Content{" + "contentId=" + contentId + ", authorId=" + authorId + ", text=" + text + ", imagePath=" + imagePath + ", publishDate=" + publishDate + '}';
+        return "Content{" + "contentId=" + contentId + ", authorId=" + authorId + ", text=" + text + ", imagePath=" + imagePath + ", likes=" + likes + ", comments=" + comments + ", publishDate=" + publishDate + '}';
     }
+
  
     
 }

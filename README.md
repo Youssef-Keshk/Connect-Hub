@@ -72,7 +72,7 @@ creational, structural and behavioral design patterns.
 3. **Clone the Repository**:  
    ```bash
    git clone https://github.com/Youssef-Keshk/Connect-Hub.git
-4. **Add the Jackson dependencies in your pom.xml file**:  
+4. **Add the Jackson dependencies to your pom.xml file**:  
    ```bash
    <dependencies>
         <dependency>

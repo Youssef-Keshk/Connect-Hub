@@ -2,35 +2,38 @@
   "contentId" : "P14",
   "authorId" : "U2",
   "text" : "this is new post by zeyad!",
-  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9\\Connect-Hub\\src\\main\\java\\icons\\Avengers Backgrounds 11.jpg",
+  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9 + 10 + 11\\Connect-Hub\\src\\main\\java\\icons\\Avengers Backgrounds 11.jpg",
+  "likes" : [ {
+    "userId" : "U1"
+  } ],
+  "comments" : [ {
+    "userId" : "U1",
+    "text" : "Great post!"
+  } ],
   "publishDate" : "2024-12-10T23:41:55",
   "type" : "POST"
-}, {
-  "contentId" : "S12",
-  "authorId" : "U1",
-  "text" : "this is story number 1!",
-  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9\\Connect-Hub\\src\\main\\java\\icons\\broken_knight-wallpaper-1366x768.jpg",
-  "publishDate" : "2024-12-10T23:43:04",
-  "type" : "STORY"
-}, {
-  "contentId" : "S13",
-  "authorId" : "U1",
-  "text" : "This is a second story!",
-  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9\\Connect-Hub\\src\\main\\java\\icons\\moon-images-at-night-dowload.jpg",
-  "publishDate" : "2024-12-10T23:43:47",
-  "type" : "STORY"
 }, {
   "contentId" : "P15",
   "authorId" : "U1",
   "text" : "This is a post!",
-  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9\\Connect-Hub\\src\\main\\java\\icons\\rL-OM-Buddhist-Meditation-Music-for-Positive-Energy-.jpg",
+  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9 + 10 + 11\\Connect-Hub\\src\\main\\java\\icons\\rL-OM-Buddhist-Meditation-Music-for-Positive-Energy-.jpg",
+  "likes" : [ ],
+  "comments" : [ ],
   "publishDate" : "2024-12-10T23:45:48",
   "type" : "POST"
 }, {
   "contentId" : "P16",
   "authorId" : "U3",
   "text" : "This is my first post!",
-  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9\\Connect-Hub\\src\\main\\java\\icons\\wallpaperflare.com_wallpaper...jpg",
+  "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9 + 10 + 11\\Connect-Hub\\src\\main\\java\\icons\\wallpaperflare.com_wallpaper...jpg",
+  "likes" : [ ],
+  "comments" : [ {
+    "userId" : "U1",
+    "text" : "Write a comment..."
+  }, {
+    "userId" : "U1",
+    "text" : "Wow !!!"
+  } ],
   "publishDate" : "2024-12-10T23:48:40",
   "type" : "POST"
 } ]

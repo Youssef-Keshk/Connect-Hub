@@ -161,8 +161,8 @@ public class NewsFeedPanel extends javax.swing.JPanel {
     }
     
     public void addPost(Post post) {
-        ItemContentPanel icp = new ItemContentPanel(parent, post);
-        friendsContentPanel.add(icp);
+        ItemPostPanel ipp = new ItemPostPanel(parent, post);
+        friendsContentPanel.add(ipp);
     }
     
     public String getNewPath(String title) {

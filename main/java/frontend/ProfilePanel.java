@@ -55,8 +55,8 @@ public class ProfilePanel extends javax.swing.JPanel {
             postsPanel.add(label, BorderLayout.CENTER);
         }
         for (Post post : posts) {
-            ItemContentPanel icp = new ItemContentPanel(parent, post);
-            postsPanel.add(icp);
+            ItemPostPanel ipp = new ItemPostPanel(parent, post);
+            postsPanel.add(ipp);
         }
     }
 

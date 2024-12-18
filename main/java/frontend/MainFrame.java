@@ -120,7 +120,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void switchToProfilePage() {
        refreshManagers();
        cardLayout.show(mainPanel, "ProfilePanel");
-       resizeFrame(new Dimension(1000, 600));
+       resizeFrame(new Dimension(700, 600));
        profilePanel.startProfile();
        
     }

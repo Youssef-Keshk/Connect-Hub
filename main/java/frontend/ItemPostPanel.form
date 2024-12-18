@@ -129,15 +129,15 @@
                           <Component id="imageLabel" min="-2" pref="266" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="addCommentButton" max="32767" attributes="0"/>
+                              <Component id="sendCommentButton" max="32767" attributes="0"/>
                               <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="likeButton" min="-2" pref="40" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="likesNumberLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="likesNumberLabel" min="-2" pref="8" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="viewCommentsButton" pref="110" max="32767" attributes="0"/>
+                              <Component id="viewCommentsButton" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -155,7 +155,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="69" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Component id="addCommentButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="sendCommentButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="viewCommentsButton" min="-2" pref="23" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
@@ -203,7 +203,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="addCommentButton">
+        <Component class="javax.swing.JButton" name="sendCommentButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="0" red="66" type="rgb"/>
@@ -214,7 +214,7 @@
             <Property name="text" type="java.lang.String" value="Send"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCommentButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendCommentButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="viewCommentsButton">
@@ -242,6 +242,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f2" green="f2" red="f2" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>

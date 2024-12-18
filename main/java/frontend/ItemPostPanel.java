@@ -16,7 +16,7 @@ import databases.FilePaths;
 public class ItemPostPanel extends javax.swing.JPanel {
     private final MainFrame parent;
     private final String userId;
-    private final Post content;
+    private final Post post;
     private final String username;
     private final String profilePath;
     private final String imagePath;
@@ -26,7 +26,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
     
     public ItemPostPanel(MainFrame parent, Post post) {
         this.parent = parent;
-        this.content = post;
+        this.post = post;
         this.userId = parent.getUser().getUserId();
         String authorId = post.getAuthorId();
         AccountManager accountManager = parent.getAccountManager();
@@ -55,7 +55,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
         usernameLabel.setText(username);
         dateLabel.setText(time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         textArea.setText(text);
-        isLiked = content.getLike(userId) != null;
+        isLiked = post.getLike(userId) != null;
         
         setProfilePicLabel();
         setImageLabel();
@@ -101,7 +101,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
     }
     
     private void setLikeButton() {
-        likesNumberLabel.setText(String.valueOf(content.getLikes().size()));
+        likesNumberLabel.setText(String.valueOf(post.getLikes().size()));
         
         
         String likeImagePath;
@@ -152,7 +152,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
         imageLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-        addCommentButton = new javax.swing.JButton();
+        sendCommentButton = new javax.swing.JButton();
         viewCommentsButton = new javax.swing.JButton();
         likeButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -216,12 +216,12 @@ public class ItemPostPanel extends javax.swing.JPanel {
         textArea.setFocusable(false);
         jScrollPane1.setViewportView(textArea);
 
-        addCommentButton.setBackground(new java.awt.Color(102, 0, 255));
-        addCommentButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        addCommentButton.setText("Send");
-        addCommentButton.addActionListener(new java.awt.event.ActionListener() {
+        sendCommentButton.setBackground(new java.awt.Color(102, 0, 255));
+        sendCommentButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        sendCommentButton.setText("Send");
+        sendCommentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCommentButtonActionPerformed(evt);
+                sendCommentButtonActionPerformed(evt);
             }
         });
 
@@ -238,6 +238,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
         });
 
         likeButton.setBackground(new java.awt.Color(242, 242, 242));
+        likeButton.setBorder(null);
         likeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 likeButtonActionPerformed(evt);
@@ -285,14 +286,14 @@ public class ItemPostPanel extends javax.swing.JPanel {
                         .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(textAndImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addCommentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sendCommentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(textAndImagePanelLayout.createSequentialGroup()
                                 .addComponent(likeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(likesNumberLabel)
+                                .addComponent(likesNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(viewCommentsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))))
+                            .addComponent(viewCommentsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         textAndImagePanelLayout.setVerticalGroup(
@@ -305,7 +306,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
                     .addGroup(textAndImagePanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(addCommentButton)
+                        .addComponent(sendCommentButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(viewCommentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -338,31 +339,31 @@ public class ItemPostPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCommentButtonActionPerformed
-        String text = commentTextArea.getText();
-        if(text.equals("Comment...") || text.equals(""))
+    private void sendCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendCommentButtonActionPerformed
+        String commentText = commentTextArea.getText();
+        if(commentText.equals("Write a comment...") || commentText.equals(""))
             return;
-        parent.getContentManager().addComment(content.getContentId(), userId, text);
+        parent.getContentManager().addComment(post.getContentId(), userId, commentText);
         setCommentField();
-    }//GEN-LAST:event_addCommentButtonActionPerformed
+    }//GEN-LAST:event_sendCommentButtonActionPerformed
+
+    private void viewCommentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCommentsButtonActionPerformed
+        ViewCommentsDialog vcd = new ViewCommentsDialog(parent, post.getComments());
+        vcd.setVisible(true);
+    }//GEN-LAST:event_viewCommentsButtonActionPerformed
 
     private void likeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_likeButtonActionPerformed
         if(isLiked)
-            parent.getContentManager().removeLike(content.getContentId(), userId);
+        parent.getContentManager().removeLike(post.getContentId(), userId);
         else
-            parent.getContentManager().addLike(content.getContentId(), userId);
-        
+        parent.getContentManager().addLike(post.getContentId(), userId);
+
         isLiked = !isLiked;
         setLikeButton();
     }//GEN-LAST:event_likeButtonActionPerformed
 
-    private void viewCommentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCommentsButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_viewCommentsButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addCommentButton;
     private javax.swing.JTextArea commentTextArea;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel imageLabel;
@@ -371,6 +372,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
     private javax.swing.JButton likeButton;
     private javax.swing.JLabel likesNumberLabel;
     private javax.swing.JLabel profilePicLabel;
+    private javax.swing.JButton sendCommentButton;
     private javax.swing.JPanel textAndImagePanel;
     private javax.swing.JTextArea textArea;
     private javax.swing.JPanel usernameAndTypePanel;

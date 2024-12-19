@@ -1,10 +1,13 @@
 package frontend;
 
 import entities.*;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 
 public class ItemNotificationPanel extends javax.swing.JPanel {
 
@@ -25,10 +28,28 @@ public class ItemNotificationPanel extends javax.swing.JPanel {
         messageLabel.setText(notification.getMessage());
     }
 
-//    @Override
-//    public Dimension getPreferredSize() {
-//        return new Dimension(220, 60); // Width and height for the panel
-//    }
+    public void apearChatPanel(String friendID) {
+        try {
+            // Create the dialog
+            JDialog dialog = new JDialog((Frame) null, "Private chat", true);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            // Create and set up the ManageRequestedPanel
+            ChatPanel chatPanel = new ChatPanel(parent, friendID);
+            dialog.setLayout(new BorderLayout());
+            dialog.add(chatPanel, BorderLayout.CENTER);
+
+            // Set dialog size and location
+            dialog.pack();
+            dialog.setLocationRelativeTo(null); // Center the dialog
+
+            // Show the dialog
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("Error showing chatPanel" + e.getMessage());
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -52,11 +73,14 @@ public class ItemNotificationPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void messageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_messageLabelMouseClicked
-        if (notification instanceof FriendRequestNotification){
+        if (notification instanceof FriendRequestNotification) {
             parent.switchToFriendsPage();
         }
-        if (notification instanceof LikesNotification || notification instanceof CommentsNotification){
+        if (notification instanceof LikesNotification || notification instanceof CommentsNotification) {
             parent.switchToProfilePage();
+        }
+        if (notification instanceof MessageNotification) {
+            apearChatPanel(((MessageNotification) notification).getSenderId());
         }
     }//GEN-LAST:event_messageLabelMouseClicked
 

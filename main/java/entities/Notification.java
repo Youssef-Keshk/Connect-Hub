@@ -10,7 +10,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = PostNotification.class, name = "POST"),
     @JsonSubTypes.Type(value = UserAddedNotification.class, name = "USER_ADDED"),
     @JsonSubTypes.Type(value = CommentsNotification.class, name = "Comment"),   
-    @JsonSubTypes.Type(value = LikesNotification.class, name = "Like")        
+    @JsonSubTypes.Type(value = LikesNotification.class, name = "Like"),
+    @JsonSubTypes.Type(value = MessageNotification.class, name = "Message"),             
 })
 public abstract class Notification {
     @JsonProperty

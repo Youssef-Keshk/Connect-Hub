@@ -96,7 +96,7 @@ public class RandomGroupProfilePanel extends javax.swing.JPanel {
 
     public void leaveGroup() {
         groupManager.removeMember(searchedGroup.getGroupId(), searchedGroup.getPrimaryAdminId(), mainUser.getUserId());
-        friendshipManager.removeRequest(searchedGroup.getGroupId(), mainUser.getUserId());
+        friendshipManager.removeGroupRequest(searchedGroup.getGroupId(), mainUser.getUserId());
         startGroupProfile(searchedGroup, false);  
     }
     

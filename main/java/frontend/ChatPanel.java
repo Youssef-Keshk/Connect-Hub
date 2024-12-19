@@ -242,10 +242,12 @@ public class ChatPanel extends javax.swing.JPanel {
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         handleMessage();
+        parent.getNotificationManager().createMessageNotification(primaryUser, secondaryUser.getUserId());
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void chatTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatTextFieldActionPerformed
         handleMessage();
+        parent.getNotificationManager().createMessageNotification(primaryUser, secondaryUser.getUserId());
     }//GEN-LAST:event_chatTextFieldActionPerformed
 
 

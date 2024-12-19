@@ -21,6 +21,27 @@ public class ManageFriendPanel extends javax.swing.JPanel {
         this.parentDialog = parentDialog;
         initComponents();
     }
+    public void apearChatPanel(){
+        try {
+            // Create the dialog
+            JDialog dialog = new JDialog((Frame) null, "Private chat", true);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            // Create and set up the ManageRequestedPanel
+            ChatPanel chatPanel = new ChatPanel(parent, friendID);
+            dialog.setLayout(new BorderLayout());
+            dialog.add(chatPanel, BorderLayout.CENTER);
+
+            // Set dialog size and location
+            dialog.pack();
+            dialog.setLocationRelativeTo(null); // Center the dialog
+
+            // Show the dialog
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("Error showing chatPanel" + e.getMessage());
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -100,26 +121,7 @@ public class ManageFriendPanel extends javax.swing.JPanel {
 
     private void chatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatButtonActionPerformed
         parentDialog.dispose();
-        try {
-            // Create the dialog
-            JDialog dialog = new JDialog((Frame) null, "Private chat", true);
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-
-            // Create and set up the ManageRequestedPanel
-            ChatPanel chatPanel = new ChatPanel(parent, friendID);
-            dialog.setLayout(new BorderLayout());
-            dialog.add(chatPanel, BorderLayout.CENTER);
-
-            // Set dialog size and location
-            dialog.pack();
-            dialog.setLocationRelativeTo(null); // Center the dialog
-
-            // Show the dialog
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            System.out.println("Error showing chatPanel" + e.getMessage());
-        }
-
+        apearChatPanel();
     }//GEN-LAST:event_chatButtonActionPerformed
 
 

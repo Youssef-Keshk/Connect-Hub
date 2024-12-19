@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 
-public class AllNotificationsPanel extends javax.swing.JPanel {
+public class AllNotificationsPanel extends javax.swing.JPanel{
     ArrayList<Notification> notifications;
     private final MainFrame parent;
  

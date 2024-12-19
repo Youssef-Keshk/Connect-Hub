@@ -13,8 +13,8 @@ public class GroupStatusNotification extends Notification{
     public GroupStatusNotification() {
     }
 
-    public GroupStatusNotification(String group, User main) {
-        super(main);
+    public GroupStatusNotification(String group, String mainId) {
+        super(mainId);
         this.group = group;
     }
 

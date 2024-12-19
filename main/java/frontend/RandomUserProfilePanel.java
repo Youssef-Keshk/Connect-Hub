@@ -26,12 +26,14 @@ public class RandomUserProfilePanel extends javax.swing.JPanel {
     private final ContentManager contentManager;
     private final AccountManager accountManager;
     private final FriendshipManager friendshipManager;
+    private final NotificationManager notificationManager;
     
     public RandomUserProfilePanel(MainFrame parent) {
         this.parent = parent;
         contentManager = parent.getContentManager();
         accountManager = parent.getAccountManager();
         friendshipManager = parent.getFriendshipManager();
+        notificationManager = parent.getNotificationManager();
         
         initComponents();
         postsPanel.setLayout(new javax.swing.BoxLayout(postsPanel, javax.swing.BoxLayout.Y_AXIS));
@@ -142,6 +144,7 @@ public class RandomUserProfilePanel extends javax.swing.JPanel {
     public void manageAction() {
         if(status == null) {
             friendshipManager.sendRequest(mainUser.getUserId(), searchedUser.getUserId());
+            notificationManager.createRequestNotification(mainUser, searchedUser.getUserId());        
             JOptionPane.showMessageDialog(null, "Friend request sent to " + searchedUser.getUsername(), "Message", JOptionPane.INFORMATION_MESSAGE);
             parent.switchToRandomUserProfile(searchedUser);
         }

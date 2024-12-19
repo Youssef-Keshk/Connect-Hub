@@ -18,7 +18,7 @@ public class NotificationDatabase extends DatabaseHandler<Notification> {
     public ArrayList<Notification> getAllNotifications(String userId) {
         ArrayList<Notification> allNotifications = new ArrayList<>();
         for (Notification notification : records) {
-            if (notification.getUserId().equals(userId)) {
+            if (notification.getUserId() != null && notification.getUserId().equals(userId)) {
                 allNotifications.add(notification);
             }
         }

@@ -16,8 +16,8 @@ public class UserAddedNotification extends Notification{
     }
 
 
-    public UserAddedNotification(String user, String group, User main) {
-        super(main);
+    public UserAddedNotification(String user, String group, String mainId) {
+        super(mainId);
         this.user = user;
         this.group = group;
     }

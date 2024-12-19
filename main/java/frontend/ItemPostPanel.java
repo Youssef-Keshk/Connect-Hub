@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import javax.swing.ImageIcon;
 import managers.AccountManager;
+import managers.NotificationManager;
 import databases.FilePaths;
 
 
@@ -23,11 +24,13 @@ public class ItemPostPanel extends javax.swing.JPanel {
     private final LocalDateTime time;
     private final String text;
     private boolean isLiked;
+    private final NotificationManager notificationManager;
     
     public ItemPostPanel(MainFrame parent, Post post) {
         this.parent = parent;
         this.post = post;
         this.userId = parent.getUser().getUserId();
+        this.notificationManager = parent.getNotificationManager();
         String authorId = post.getAuthorId();
         AccountManager accountManager = parent.getAccountManager();
         
@@ -344,6 +347,7 @@ public class ItemPostPanel extends javax.swing.JPanel {
         if(commentText.equals("Write a comment...") || commentText.equals(""))
             return;
         parent.getContentManager().addComment(post.getContentId(), userId, commentText);
+        notificationManager.createCommentNotification(parent.getUser(), post.getAuthorId());
         setCommentField();
     }//GEN-LAST:event_sendCommentButtonActionPerformed
 
@@ -355,9 +359,10 @@ public class ItemPostPanel extends javax.swing.JPanel {
     private void likeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_likeButtonActionPerformed
         if(isLiked)
         parent.getContentManager().removeLike(post.getContentId(), userId);
-        else
+        else{
         parent.getContentManager().addLike(post.getContentId(), userId);
-
+        notificationManager.createLikeNotification(parent.getUser(), post.getAuthorId(), post.getContentId());
+        }
         isLiked = !isLiked;
         setLikeButton();
     }//GEN-LAST:event_likeButtonActionPerformed

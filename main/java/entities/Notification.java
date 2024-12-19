@@ -8,23 +8,25 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = FriendRequestNotification.class, name = "FRIEND_REQUEST"),
     @JsonSubTypes.Type(value = GroupStatusNotification.class, name = "GROUP_STATUS"),
     @JsonSubTypes.Type(value = PostNotification.class, name = "POST"),
-    @JsonSubTypes.Type(value = UserAddedNotification.class, name = "USER_ADDED")
+    @JsonSubTypes.Type(value = UserAddedNotification.class, name = "USER_ADDED"),
+    @JsonSubTypes.Type(value = CommentsNotification.class, name = "Comment"),   
+    @JsonSubTypes.Type(value = LikesNotification.class, name = "Like")        
 })
 public abstract class Notification {
     @JsonProperty
     protected boolean isRead;
     @JsonProperty
-    protected User main;
+    protected String mainId;
 
     public Notification() {
     }
 
-    public Notification(User main) {
-        this.main = main;
+    public Notification(String mainId) {
+        this.mainId = mainId;
     }
 
     public String getUserId() {
-        return main.getUserId();
+        return mainId;
     }
     public abstract String getMessage();
     public void markAsRead(){

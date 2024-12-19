@@ -14,6 +14,8 @@ public class Friendship {
     private FriendshipStatus status;
     @JsonProperty
     private FriendshipType type;
+    @JsonProperty
+    private Chat chat;
     
     public Friendship(){}
     
@@ -48,13 +50,18 @@ public class Friendship {
     public void setStatus(FriendshipStatus status) {
         this.status = status;
     }
-    
+
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void addMessage(String messageSenderId, String message) {
+        chat.addMessage(messageSenderId, message);
+    }
 
     @Override
     public String toString() {
-        return "Friendship{" + "senderID=" + senderId + ", receiverID=" + receiverId + ", status=" + status + '}';
+        return "Friendship{" + "senderId=" + senderId + ", receiverId=" + receiverId + ", status=" + status + ", type=" + type + ", chat=" + chat + '}';
     }
-    
-    
     
 }

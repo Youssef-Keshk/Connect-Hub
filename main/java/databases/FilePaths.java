@@ -24,5 +24,6 @@ public interface FilePaths {
     final String UPLOAD_PHOTO_ICON = ICONS_DIRECTORY + "uploadPhoto.png";
     final String LIKE_PHOTO_FILEPATH = ICONS_DIRECTORY + "like.png";
     final String FILLED_LIKE_PHOTO_FILEPATH = ICONS_DIRECTORY + "filledLike.png";
+    final String SEND_ICON_FILEPATH = ICONS_DIRECTORY + "sendIcon.png";
 
 }

@@ -125,11 +125,6 @@ public class FriendshipManager implements Manager{
         return friendshipDataBase.getFriendshipOfTwoUsers(userID1, userID2);
     }
     
-    
-    public ArrayList<Friendship> get() {
-        return friendshipDataBase.getAllRecords();
-    }
-    
     public ArrayList<String> getAllSentFriends(String userId) {
         return friendshipDataBase.getReceivedRequests(userId);
     }
@@ -194,11 +189,16 @@ public class FriendshipManager implements Manager{
     }
     
  
-    public boolean removeRequest(String groupId, String userId) {
+    public boolean removeGroupRequest(String groupId, String userId) {
         Friendship friendship = friendshipDataBase.getGroupFriendShipRequest(groupId, userId);
         if(friendship == null)
             return false;
         return friendshipDataBase.removeRecord(friendship);
     }
 
+    // Addes a new message in a friendship private chat
+    public void addMessage(Friendship friendship, String messageSenderId, String message) {
+        friendship.addMessage(messageSenderId, message);
+        save();
+    }
 }

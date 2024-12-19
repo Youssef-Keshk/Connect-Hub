@@ -2,10 +2,24 @@
   "senderId" : "U3",
   "receiverId" : "U1",
   "status" : "ACCEPTED",
-  "type" : "USERS"
+  "type" : "USERS",
+  "chat" : {
+    "messages" : [ {
+      "messageSenderId" : "U1",
+      "message" : "Hi, how are you?",
+      "timestamp" : "2024-12-19T12:00:00"
+    }, {
+      "messageSenderId" : "U3",
+      "message" : "I'm good! How about you?",
+      "timestamp" : "2024-12-19T12:01:00"
+    } ]
+  }
 }, {
   "senderId" : "U2",
   "receiverId" : "U3",
   "status" : "ACCEPTED",
-  "type" : "USERS"
+  "type" : "USERS",
+  "chat" : {
+    "messages" : [ ]
+  }
 } ]

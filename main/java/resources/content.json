@@ -17,7 +17,9 @@
   "authorId" : "U1",
   "text" : "This is a post!",
   "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9 + 10 + 11\\Connect-Hub\\src\\main\\java\\icons\\rL-OM-Buddhist-Meditation-Music-for-Positive-Energy-.jpg",
-  "likes" : [ ],
+  "likes" : [ {
+    "userId" : "U1"
+  } ],
   "comments" : [ ],
   "publishDate" : "2024-12-10T23:45:48",
   "type" : "POST"
@@ -26,13 +28,15 @@
   "authorId" : "U3",
   "text" : "This is my first post!",
   "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9 + 10 + 11\\Connect-Hub\\src\\main\\java\\icons\\wallpaperflare.com_wallpaper...jpg",
-  "likes" : [ ],
+  "likes" : [ {
+    "userId" : "U1"
+  } ],
   "comments" : [ {
     "userId" : "U1",
-    "text" : "Write a comment..."
+    "text" : "Wow !!!"
   }, {
     "userId" : "U1",
-    "text" : "Wow !!!"
+    "text" : "This is a new comment!"
   } ],
   "publishDate" : "2024-12-10T23:48:40",
   "type" : "POST"

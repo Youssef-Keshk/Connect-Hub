@@ -114,7 +114,7 @@ public class ItemManageFriendsPanel extends javax.swing.JPanel {
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
             // Create and set up the ManageRequestedPanel
-            ManageFriendPanel managefriendPanel = new ManageFriendPanel(parent.getUser().getUserId(), userID, parent.getFriendshipManager(), dialog);
+            ManageFriendPanel managefriendPanel = new ManageFriendPanel(parent, userID, dialog);
             dialog.setLayout(new BorderLayout());
             dialog.add(managefriendPanel, BorderLayout.CENTER);
 

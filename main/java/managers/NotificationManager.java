@@ -20,8 +20,28 @@ public class NotificationManager implements Manager{
     public NotificationManager() {
         notificationDatabase = new NotificationDatabase();
     }
-    public void createRequestNotification(User sender, User reciever){
-        sendNotification(new FriendRequestNotification(sender, reciever));
+    public void createRequestNotification(User sender, String recieverId){
+        sendNotification(new FriendRequestNotification(sender, recieverId));
+    }
+    
+    public void createCommentNotification(User sender, String recieverId){
+        sendNotification(new CommentsNotification(sender, recieverId));
+    }
+    
+    public void createLikeNotification(User sender, String recieverId, String postId){
+        ArrayList <Notification> notifications = getAllNotifications(recieverId);
+        for(Notification notification : notifications ){
+            if (notification instanceof LikesNotification){
+                if (((LikesNotification) notification).getPostId() == postId){
+                    return;
+                }
+            }
+        }
+         sendNotification(new LikesNotification(sender, recieverId, postId));
+    }
+    
+    public void createMessageNotification(User sender, String recieverId){
+        sendNotification(new MessageNotification(sender, recieverId));
     }
 
     public void sendNotification(Notification notification) {

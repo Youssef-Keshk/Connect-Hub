@@ -13,8 +13,8 @@ public class PostNotification extends Notification{
     public PostNotification() {
     }
 
-    public PostNotification(String sender, User main) {
-        super(main);
+    public PostNotification(String sender, String mainId) {
+        super(mainId);
         this.sender = sender;
     }
 

@@ -55,6 +55,9 @@ public class ItemNotificationPanel extends javax.swing.JPanel {
         if (notification instanceof FriendRequestNotification){
             parent.switchToFriendsPage();
         }
+        if (notification instanceof LikesNotification || notification instanceof CommentsNotification){
+            parent.switchToProfilePage();
+        }
     }//GEN-LAST:event_messageLabelMouseClicked
 
 

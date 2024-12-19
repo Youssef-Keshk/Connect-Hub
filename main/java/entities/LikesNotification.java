@@ -4,23 +4,30 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FriendRequestNotification extends Notification {
+public class LikesNotification extends Notification {
     @JsonProperty("type")
-    private final String type = "FRIEND_REQUEST";
+    private final String type = "Like";
     @JsonProperty
     private String senderName;
+    @JsonProperty
+    private String postId;
 
-    public FriendRequestNotification() {
+    public LikesNotification() {
     }
 
-    public FriendRequestNotification(User sender, String mainId) {
+    public LikesNotification(User sender, String mainId, String postId) {
         super(mainId);
         this.senderName = sender.getUsername();
+        this.postId = postId;
     }
 
+    public String getPostId() {
+        return postId;
+    }
+    
     @Override
     public String getMessage() {
-        return senderName + " sent you a friend request.";
+        return senderName + " Liked your post.";
     }
 
 }

@@ -19,8 +19,16 @@
   "imagePath" : "D:\\programming2 JAVA\\ASGMTS\\LAB9 + 10 + 11\\Connect-Hub\\src\\main\\java\\icons\\rL-OM-Buddhist-Meditation-Music-for-Positive-Energy-.jpg",
   "likes" : [ {
     "userId" : "U1"
+  }, {
+    "userId" : "U3"
   } ],
-  "comments" : [ ],
+  "comments" : [ {
+    "userId" : "U3",
+    "text" : "Great post!!"
+  }, {
+    "userId" : "U3",
+    "text" : "Good Job :)"
+  } ],
   "publishDate" : "2024-12-10T23:45:48",
   "type" : "POST"
 }, {
@@ -36,8 +44,8 @@
     "text" : "Wow !!!"
   }, {
     "userId" : "U1",
-    "text" : "This is a new comment!"
-  } ],
+    "text" : "Great post!"
+  }],
   "publishDate" : "2024-12-10T23:48:40",
   "type" : "POST"
 } ]

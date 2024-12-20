@@ -1,7 +1,6 @@
 package databases;
 
 import entities.Group;
-import java.util.ArrayList;
 
 public class GroupDatabase extends DatabaseHandler<Group>{
     

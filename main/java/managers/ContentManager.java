@@ -29,6 +29,14 @@ public class ContentManager implements Manager{
         contentDatabase = new ContentDatabase();
     }
     
+    public Story getStory(String contentId) {
+        return (Story)contentDatabase.getContent(contentId);
+    }
+    
+    public Post getPost(String contentId) {
+        return (Post)contentDatabase.getContent(contentId);
+    }
+    
     
     public ArrayList<Story> getStories(String userID) {
         return contentDatabase.getStories(userID);

@@ -25,6 +25,8 @@ public class NotificationManager implements Manager{
     }
     
     public void createCommentNotification(User sender, String recieverId){
+        if (sender.getUserId().equals(recieverId))
+            return;
         sendNotification(new CommentsNotification(sender, recieverId));
     }
     

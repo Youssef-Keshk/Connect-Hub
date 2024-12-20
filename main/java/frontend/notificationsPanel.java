@@ -4,20 +4,45 @@ import entities.Notification;
 import managers.NotificationManager;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 public class NotificationsPanel extends javax.swing.JPanel {
 
     private final MainFrame parent;
     private NotificationManager notificationManager;
-
+    private Thread notificationRefreshThread;
+    private volatile boolean isRunning = false;
+    private ArrayList<Notification> currentNotifications = new ArrayList<>();
+    
     public NotificationsPanel(MainFrame parent) {
         this.parent = parent;
         initComponents();
     }
 
     public void startNotifications() {
+        isRunning = true; // Start the notification refresh thread
         notificationManager = parent.getNotificationManager();
-        displayNotifications();
+        currentNotifications = notificationManager.getAllNotifications(parent.getUser().getUserId());
+        updateNotificationsDisplay(currentNotifications);
+        notificationRefreshThread = new Thread(() -> {
+            while (isRunning) {
+                try {
+                    refreshNotifications();
+                    Thread.sleep(1000); // Refresh every second
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt(); // Restore interrupted status
+                }
+            }
+        });
+
+        notificationRefreshThread.start();
+    }
+
+    public void stopNotifications() {
+        isRunning = false;
+        if (notificationRefreshThread != null) {
+            notificationRefreshThread.interrupt(); // Interrupt the thread if it's sleeping
+        }
     }
 
     private void resetPanels() {
@@ -26,25 +51,41 @@ public class NotificationsPanel extends javax.swing.JPanel {
         containerPanel.repaint();
     }
 
-    private void displayNotifications() {
-        resetPanels();
-
-        // Retrieve all notifications
-        ArrayList<Notification> notifications = notificationManager.getAllNotifications(parent.getUser().getUserId());
-
-        // Check if there are no notifications
-        if (notifications.isEmpty()) {
-            // Display "No notifications available" message
-            JLabel noNotificationsLabel = new JLabel("No notifications available.", JLabel.CENTER);
-            containerPanel.setLayout(new java.awt.BorderLayout());
-            containerPanel.add(noNotificationsLabel, java.awt.BorderLayout.CENTER);
-        } else {
-            // Display the notifications in AllNotificationsPanel
-            AllNotificationsPanel allNotificationsPanel = new AllNotificationsPanel(notifications, parent);
-            containerPanel.setLayout(new java.awt.BorderLayout());
-            containerPanel.add(allNotificationsPanel, java.awt.BorderLayout.CENTER);
-        }
+    private void refreshNotifications() {
+        // Ensure UI updates are done on the EDT
+        SwingUtilities.invokeLater(() -> {
+            // Fetch updated notifications
+            notificationManager.refresh();
+            ArrayList<Notification> notifications = notificationManager.getAllNotifications(parent.getUser().getUserId());
+            
+            // Check if notifications have changed to avoid unnecessary UI updates
+            if (!notifications.equals(currentNotifications)) {
+                currentNotifications = new ArrayList<>(notifications);
+                updateNotificationsDisplay(currentNotifications);
+            }
+        });
     }
+
+    private void updateNotificationsDisplay(ArrayList<Notification> notifications) {
+    resetPanels();
+
+    if (notifications == null || notifications.isEmpty()) {
+        // Display "No notifications available" message
+        JLabel noNotificationsLabel = new JLabel("No notifications available.", JLabel.CENTER);
+        containerPanel.setLayout(new java.awt.BorderLayout());
+        containerPanel.add(noNotificationsLabel, java.awt.BorderLayout.CENTER);
+    } else {
+        // Display notifications in AllNotificationsPanel
+        AllNotificationsPanel allNotificationsPanel = new AllNotificationsPanel(notifications, parent);
+        containerPanel.setLayout(new java.awt.BorderLayout());
+        containerPanel.add(allNotificationsPanel, java.awt.BorderLayout.CENTER);
+    }
+
+    containerPanel.revalidate();
+    containerPanel.repaint();
+}
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -99,6 +140,7 @@ public class NotificationsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        stopNotifications();
         parent.switchToNewsFeedPage();
     }//GEN-LAST:event_backButtonActionPerformed
 

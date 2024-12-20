@@ -24,6 +24,7 @@ public class Friendship {
         this.receiverId = builder.receiverId;
         this.status = builder.status;
         this.type = builder.type;
+        this.chat = new Chat();
     }
     
     public static FriendshipBuilder builder() {

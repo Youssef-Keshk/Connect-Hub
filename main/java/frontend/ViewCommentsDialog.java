@@ -63,6 +63,7 @@ public class ViewCommentsDialog extends javax.swing.JDialog {
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
+        commentsContainerPanel.setMinimumSize(new java.awt.Dimension(0, 16));
         commentsContainerPanel.setLayout(new javax.swing.BoxLayout(commentsContainerPanel, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(commentsContainerPanel);
 

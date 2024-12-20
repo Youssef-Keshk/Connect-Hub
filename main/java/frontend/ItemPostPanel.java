@@ -17,7 +17,7 @@ import databases.FilePaths;
 public class ItemPostPanel extends javax.swing.JPanel {
     private final MainFrame parent;
     private final String userId;
-    private final Post post;
+    private Post post;
     private final String username;
     private final String profilePath;
     private final String imagePath;
@@ -352,6 +352,8 @@ public class ItemPostPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sendCommentButtonActionPerformed
 
     private void viewCommentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCommentsButtonActionPerformed
+        parent.getContentManager().refresh();
+        this.post = parent.getContentManager().getPost(post.getContentId());
         ViewCommentsDialog vcd = new ViewCommentsDialog(parent, post.getComments());
         vcd.setVisible(true);
     }//GEN-LAST:event_viewCommentsButtonActionPerformed
